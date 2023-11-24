@@ -21,8 +21,10 @@ const plugSubmenuOrder = [
 ]
 
 const mainMenuOrder = [
-    "plugs"
-    ,"keyboard"
+    "t2s"
+    ,"tv"
+    ,"music"
+    ,'outlet'
     ,"settings"
 ]
 
@@ -164,6 +166,8 @@ function openSubmenu(event, supermenuId, submenuId) {
     let supermenu = document.getElementById(supermenuId);
     let submenu = document.getElementById(submenuId);
 
+    //if (singleInputMode) resetCycle(supermenuId)
+
     if (supermenu && submenu) {
         supermenu.style.display = 'none'; // Hide the supermenu
         submenu.style.display = 'block'; // Show the submenu
@@ -213,18 +217,42 @@ function accessibilityMouseClick(e) {
         document.body.onpointerdown = e => accessibilityMouseClick()
     }
 }
-
 function cycleSelection() {
     if (previousElement != null) previousElement.style.backgroundColor = previousColor;
-    selectedIndex = (selectedIndex + 1) % selectedMenuOrder.length
-    var hoveredElement = document.getElementById(selectedMenuOrder[selectedIndex])
-    previousElement = hoveredElement
-    previousColor = previousElement.style.backgroundColor;
-    hoveredElement.style.backgroundColor = "orange";
-    // Handle Hover Element Highlighting
-    // console.log(selectedMenuOrder[selectedIndex])
-    cycleTimeout = setTimeout(cycleSelection, cycleTime)
+    
+    do {
+        selectedIndex = (selectedIndex + 1) % selectedMenuOrder.length;
+        var hoveredElement = document.getElementById(selectedMenuOrder[selectedIndex]);
+    } while (hoveredElement && hoveredElement.offsetParent === null);
+
+    if (hoveredElement) {
+        previousElement = hoveredElement;
+        previousColor = previousElement.style.backgroundColor;
+        hoveredElement.style.backgroundColor = "orange";
+    }
+
+    cycleTimeout = setTimeout(cycleSelection, cycleTime);
 }
+document.addEventListener('click', function() {
+    selectButton();
+});
+
+function selectButton() {
+    clearInterval(cycleTimeout); // Stop cycling
+
+    if (previousElement) {
+        // Trigger the action for the selected button
+        previousElement.click();
+    }
+
+    // Optional: Restart cycling
+    // startButtonCycle();
+}
+window.onload = function() {
+    selectedMenuOrder = mainMenuOrder; // or any default menu order
+    cycleSelection();
+};
+
 
 function togglePlug(e, state) {
     let plugId = document.getElementById('plug-submenu').getAttribute('plug-label')

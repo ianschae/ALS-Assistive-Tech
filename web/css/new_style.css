@@ -17,6 +17,10 @@
 #settings-page{
   display: none;
 }
+.highlighted {
+  border: 2px solid blue; /*blue border for highlighting */
+  background-color: lightgray; /* different background color */
+}
 .desktop-main-menu {
     background-color: #cffcff;
     display: flex;
