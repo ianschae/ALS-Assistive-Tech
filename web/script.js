@@ -1,6 +1,6 @@
 /*
 -------------------------------------------
-Constants
+Auto Cycle Order Constants
 -------------------------------------------
 */
 
@@ -45,18 +45,20 @@ const speedMenuOrder = [
 ]
 
 const keyboardMenuOrder = [
-    "keyboard-new-btn"
-    ,"keyboard-menu-btn"
-]
+    'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
+    'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
+    'z', 'x', 'c', 'v', 'b', 'n', 'm',
+    '1', '2', '3', '4', '5', '6', '7', '8', '9'
+];
 
 let dynamicKeyboardOrder = [] // Used for single input mode
 
 let menuIdMapping = {
-    "plug-select" : plugSelectOrder,
-    "plug-submenu": plugSubmenuOrder
+    "plug-select" : plugSelectOrder
+    ,"plug-submenu": plugSubmenuOrder
     ,"main-menu": mainMenuOrder
     ,"settings-menu": settingsMenuOrder
-    ,"keyboard-menu": keyboardMenuOrder
+    ,"text-2-speech": keyboardMenuOrder
     ,"dynamic-kb": dynamicKeyboardOrder
     ,"configure-speed-menu": speedMenuOrder
 }
@@ -82,16 +84,18 @@ var previousColor
 var cycleTimeout
 var cycleTime =  1000  //2000
 
+var menuId = ""
+
 function init() {
     // setTime();
     eel.loadConfig()
     for(button of document.getElementsByTagName('button')){
-        // button.addEventListener('click', resetMouse) // Changed to pointerdown event for change
-        button.addEventListener('pointerdown', resetMouse)
+        button.addEventListener('click', resetMouse) // Changed to pointerdown event for change
+        //button.addEventListener('pointerdown', resetMouse)
     }
     if (singleInputMode) {
-        // document.body.onclick = e => accessibilityMouseClick() // Chnged to pointerdown event for Jane
-        document.body.onpointerdown = e => accessibilityMouseClick(e)
+        document.body.onclick = e => accessibilityMouseClick(e) // Chnged to pointerdown event for Jane
+        //document.body.onpointerdown = e => accessibilityMouseClick(e)
         selectedMenuOrder = mainMenuOrder;
         resetCycle('main-menu')
     }
@@ -135,10 +139,10 @@ const changeMenu = (e, newMenuID) => {
 
     if (singleInputMode) resetCycle(newMenuID)
 
-    currentMenu.style.visibility = 'hidden'
-    newMenu.style.visibility = 'visible'
+    currentMenu.style.display = 'none'
+    newMenu.style.visibility = 'block'
 }
-
+/*
 function openSubmenu(event, supermenuId, submenuId) {
     if (event != undefined) event.stopPropagation();
     let supermenu = document.getElementById(supermenuId)
@@ -148,14 +152,15 @@ function openSubmenu(event, supermenuId, submenuId) {
 
     supermenu.style.visibility = 'hidden'
     submenu.style.visibility = 'visible'
-}
+}*/
 
 function closeSubmenu(event, supermenuId, submenuId) {
     if (event != undefined) event.stopPropagation();
     let supermenu = document.getElementById(supermenuId)
     let submenu = document.getElementById(submenuId)
     
-    if (singleInputMode) resetCycle(supermenuId)
+    //if (singleInputMode) 
+    //resetCycle(supermenuId)
     
     submenu.style.visibility = 'hidden'
     supermenu.style.visibility = 'visible'
@@ -166,7 +171,9 @@ function openSubmenu(event, supermenuId, submenuId) {
     let supermenu = document.getElementById(supermenuId);
     let submenu = document.getElementById(submenuId);
 
-    //if (singleInputMode) resetCycle(supermenuId)
+    if (singleInputMode)
+    menuId = submenu 
+    resetCycle(submenuId)
 
     if (supermenu && submenu) {
         supermenu.style.display = 'none'; // Hide the supermenu
@@ -184,13 +191,13 @@ Single Input Mode Functions
 const toggleInputMode = (e, mode) => {
     if (mode == 'on') {
         singleInputMode = true
-        // document.body.onclick = accessibilityMouseClick // Changed to on mouse down for Jane
-        document.body.onpointerdown = accessibilityMouseClick
+        document.body.onclick = accessibilityMouseClick // Changed to on mouse down for Jane
+        //document.body.onpointerdown = accessibilityMouseClick
     } else {
         singleInputMode = false
         if (cycleTimeout != null) previousElement.style.backgroundColor = previousColor
-        // document.body.onclick = null
-        document.body.pointerdown = null
+        document.body.onclick = null
+        //document.body.pointerdown = null
         clearTimeout(cycleTimeout)
     }
     changeMenu(e, 'main-menu')
@@ -208,22 +215,22 @@ const resetCycle = (menuId) => {
 function accessibilityMouseClick(e) {
     if (e != undefined) e.stopPropagation()
     if (singleInputMode) {  // Something keeps reseting body.click to accessibilityMouseClick, check to fix error
-        // document.body.onclick = e => {} // Changed to onpointerdown event for Jane
-        document.body.onpointerdown = e => {}
+        document.body.onclick = e => {} // Changed to onpointerdown event for Jane
+        //document.body.onpointerdown = e => {}
         selectedElement = document.getElementById(selectedMenuOrder[selectedIndex])
-        // selectedElement.click(); // Changed to pointerdown for Jane
-        selectedElement.onpointerdown()
-        // document.body.onclick = e => accessibilityMouseClick() // Changed to onpointerdown event for jane
-        document.body.onpointerdown = e => accessibilityMouseClick()
+        selectedElement.click(); // Changed to pointerdown for Jane
+        //selectedElement.onpointerdown()
+        document.body.onclick = e => accessibilityMouseClick() // Changed to onpointerdown event for jane
+        //document.body.onpointerdown = e => accessibilityMouseClick()
     }
 }
 function cycleSelection() {
     if (previousElement != null) previousElement.style.backgroundColor = previousColor;
-    
+
     do {
         selectedIndex = (selectedIndex + 1) % selectedMenuOrder.length;
         var hoveredElement = document.getElementById(selectedMenuOrder[selectedIndex]);
-    } while (hoveredElement && hoveredElement.offsetParent === null);
+    } while (hoveredElement && hoveredElement.style.display === 'none');
 
     if (hoveredElement) {
         previousElement = hoveredElement;
@@ -246,13 +253,14 @@ function selectButton() {
     }
 
     // Optional: Restart cycling
-    // startButtonCycle();
+    //resetCycle(menuId);
 }
+/*
 window.onload = function() {
     selectedMenuOrder = mainMenuOrder; // or any default menu order
     cycleSelection();
 };
-
+*/
 
 function togglePlug(e, state) {
     let plugId = document.getElementById('plug-submenu').getAttribute('plug-label')
