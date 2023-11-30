@@ -88,6 +88,10 @@ pip install eel pyautogui rpi_rf python-vlc gTTS os json pyserial
 
 Some libraries like rpi_rf and python-vlc may have additional dependencies or steps for installation. Refer to the linked documentation for each library for detailed instructions.
 
+### Running the Application
+To launch the application, navigate to the project's directory in your terminal and run:
+
+python3 main.py
 ## Setting Up the Hardware
 ### IR Transmitter:
 Connect the IR transmitter to the designated GPIO pins on your Raspberry Pi.
@@ -101,12 +105,8 @@ Load the provided Arduino sketch to manage the device's inputs and outputs.
 Configuration
 ### Device Settings:
 Modify the config.json file to set up your device's preferences and initialize the system settings.
-# Customization:
+### Customization:
 You can customize the quick phrases and other features by editing the respective configuration files in the project directory.
-### Running the Application
-To launch the application, navigate to the project's directory in your terminal and run:
-
-python3 main.py
 
 # Design and Architecture
 ## High-Level Overview
