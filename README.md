@@ -2,7 +2,7 @@
 This is the official readme for the ALS Assistive Tech Device project, it contains all information regarding the overall functionality and design of the system, as well as instructions for construction and use of the system.
 
 # Introduction
-This project is a design for a device to assist communication and provide access 
+This project is a design for a device to assist communication and provide access to everyday technologies for individuals with mobility or speech impairments, enhancing their ability to interact with their environment and offering them a greater degree of independence.
 
 # Purpose and Goals
 ## Purpose
