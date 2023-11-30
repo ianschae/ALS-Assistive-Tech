@@ -39,6 +39,30 @@ To empower ALS patients by providing a tool that enhances their ability to inter
 To promote independence and dignity for ALS patients, offering them a means to express themselves and manage their surroundings without constant reliance on caregivers.
 
 # Features
+Our assistive technology device is designed to empower users with a range of functionalities, tailored for ease of use and accessibility. Here are its key features:
+
+## Simple User Interface: 
+
+The device boasts a user-friendly interface, enabling easy navigation. This is particularly suited for users who rely on a single selector input device, ensuring that interaction with the device is straightforward and intuitive.
+
+## Text-to-Speech Functionality:
+
+### Quick Phrases: 
+Users can access pre-programmed phrases for common needs or expressions, facilitating rapid communication.
+Custom Phrase Keyboard: A built-in keyboard allows for the creation of custom phrases, catering to unique communication requirements.
+### Text Prediction: 
+To speed up typing and enhance convenience, the device features intelligent text prediction.
+### TV Control via IR Transmitter: 
+The device includes an infrared (IR) transmitter, empowering users to control their television sets remotely. This feature adds an element of autonomy in entertainment and daily living.
+
+### Wireless Outlet Control: 
+Equipped with an RF transmitter, the device can wirelessly toggle power outlets on and off. This functionality enhances the user's ability to interact with their environment effortlessly.
+
+### Music Player: 
+For entertainment and relaxation, the device incorporates a music player. This feature is designed to be easily operable, providing users with leisure and therapeutic benefits.
+
+### Customization Options: 
+Understanding that each user's needs and preferences are unique, our device offers various customization settings. These adjustments allow for a more personalized experience, enhancing comfort and usability.
 
 # Technology Stack
 ![image](https://github.com/ianschae/ALS-Assistive-Tech/assets/45367686/fca962b6-da2e-45aa-8d26-86e67cf13f10)
