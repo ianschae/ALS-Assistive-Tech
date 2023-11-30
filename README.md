@@ -1,4 +1,4 @@
-# CSE450 - ALS Assistive Tech Device
+# ALS Assistive Tech Device
 This is the official readme for the ALS Assistive Tech Device project, it contains all information regarding the overall functionality and design of the system, as well as instructions for construction and use of the system.
 
 # Introduction
