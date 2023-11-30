@@ -108,4 +108,18 @@ To launch the application, navigate to the project's directory in your terminal 
 
 python3 main.py
 
+# Design and Architecture
+## High-Level Overview
+
+Our assistive technology device is engineered with a focus on simplicity and efficiency. The design is user-centric, with a layered interface to facilitate easy navigation and interaction.
+
+## User Interface (UI)
+Main Menu
+The main menu serves as the gateway to the device's features, prioritizing straightforward access to key functionalities.
+
+Text-to-Speech Menu
+Given its anticipated frequent usage, the Text-to-Speech menu has been carefully crafted to provide a seamless experience. It includes:
+
+QWERTY Keyboard Layout: A familiar layout to ease the transition for new users.
+THAES Keyboard Layout: An alternative, efficiency-oriented layout available through settings for more adept users.
 ## 
