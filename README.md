@@ -38,6 +38,20 @@ To empower ALS patients by providing a tool that enhances their ability to inter
 
 To promote independence and dignity for ALS patients, offering them a means to express themselves and manage their surroundings without constant reliance on caregivers.
 
+# Features
+
+# Technology Stack
+![image](https://github.com/ianschae/ALS-Assistive-Tech/assets/45367686/fca962b6-da2e-45aa-8d26-86e67cf13f10)
+## Front End 
+HTML/CSS -> Javascript
+
+## Back End
+Python (eel)
+
+# Installation and Setup
+
+
+
 ## Libraries
 
 |Library | Links| Notes |
