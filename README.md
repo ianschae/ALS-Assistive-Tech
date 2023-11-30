@@ -65,11 +65,11 @@ HTML/CSS -> Javascript
 Python (eel)
 
 # Installation and Setup
+This section covers the necessary steps to get the assistive technology device operational on your system.
 
-
-
+## Prerequisites
+Ensure you have Python installed on your system, as this project is Python-based. You can download Python from python.org.
 ## Libraries
-
 |Library | Links| Notes |
 |---------|------|-------|
 |   eel   | [Documentation](https://github.com/python-eel/Eel)| For Interaction between Python Backend and JS Frontend |
@@ -81,5 +81,31 @@ Python (eel)
 |  json   | [Documentation](https://docs.python.org/3/library/json.html) | For encoding and decoding Jsons with python |
 | pyserial| [Documentation](https://pyserial.readthedocs.io/en/latest/) | For communication with the Arduino |
 
+
+To install these libraries, run the following command in your terminal:
+
+pip install eel pyautogui rpi_rf python-vlc gTTS os json pyserial
+
+Some libraries like rpi_rf and python-vlc may have additional dependencies or steps for installation. Refer to the linked documentation for each library for detailed instructions.
+
+## Setting Up the Hardware
+### IR Transmitter:
+Connect the IR transmitter to the designated GPIO pins on your Raspberry Pi.
+Ensure rpi_rf is configured to use the correct pins in the code.
+### RF Transmitter:
+Attach the RF transmitter to the Raspberry Pi's GPIO pins.
+Verify that the rpi_rf module is correctly set up to communicate with the transmitter.
+### Arduino:
+Connect the Arduino to the Raspberry Pi via USB.
+Load the provided Arduino sketch to manage the device's inputs and outputs.
+Configuration
+### Device Settings:
+Modify the config.json file to set up your device's preferences and initialize the system settings.
+# Customization:
+You can customize the quick phrases and other features by editing the respective configuration files in the project directory.
+### Running the Application
+To launch the application, navigate to the project's directory in your terminal and run:
+
+python3 main.py
 
 ## 
