@@ -23,9 +23,9 @@ To empower ALS patients by providing a tool that enhances their ability to inter
 To promote independence and dignity for ALS patients, offering them a means to express themselves and manage their surroundings without constant reliance on caregivers.
 # Features
 Our assistive technology device is designed to empower users with a range of functionalities, tailored for ease of use and accessibility. Here are its key features:
-## Simple User Interface: 
+### Simple User Interface: 
 The device boasts a user-friendly interface, enabling easy navigation suited for users who rely on a single selector input device, ensuring that interaction with the device is straightforward and intuitive.
-## Text-to-Speech Functionality:
+### Text-to-Speech Functionality:
 ### Quick Phrases: 
 Users can access pre-programmed phrases for common needs or expressions, facilitating rapid communication.
 Custom Phrase Keyboard: A built-in keyboard allows for the creation of custom phrases, catering to unique communication requirements.
