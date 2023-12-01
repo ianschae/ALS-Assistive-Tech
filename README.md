@@ -63,7 +63,9 @@ Ensure you have Python installed on your system, as this project is Python-based
 | pyserial| [Documentation](https://pyserial.readthedocs.io/en/latest/) | For communication with the Arduino |
 
 To install these libraries, run the following command in your terminal:
+
 pip install eel pyautogui rpi_rf python-vlc gTTS os json pyserial
+
 Some libraries like rpi_rf and python-vlc may have additional dependencies or steps for installation. Refer to the linked documentation for each library for detailed instructions.
 ### Running the Application
 To launch the application, navigate to the project's directory in your terminal and run:
