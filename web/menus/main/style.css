@@ -1,0 +1,106 @@
+.desktop-main-menu {
+  background-color: #cffcff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.desktop-main-menu .div {
+  background-color: #cffcff;
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+}
+
+.desktop-main-menu .page-title {
+  position: absolute;
+  width: 772px;
+  height: 82px;
+  top: 20px;
+  left: 596px;
+}
+
+.desktop-main-menu .text-wrapper {
+  position: absolute;
+  width: 727px;
+  height: 82px;
+  top: -1px;
+  left: 22px;
+  font-family: "Work Sans", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.desktop-main-menu .button-settings {
+  top: 613px;
+  left: 1059px;
+  position: absolute;
+  width: 432px;
+  height: 212px;
+}
+
+.desktop-main-menu .group {
+  width: 434px;
+  height: 212px;
+}
+
+.desktop-main-menu .overlap-group {
+  position: relative;
+  width: 432px;
+  height: 212px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px #00000040, inset 0px 4px 4px #00000040;
+}
+
+.desktop-main-menu .text-wrapper-2 {
+  position: absolute;
+  width: 432px;
+  height: 212px;
+  top: 0;
+  left: 0;
+  font-family: "Work Sans", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.desktop-main-menu .button-outlet {
+  position: absolute;
+  width: 432px;
+  height: 212px;
+  top: 613px;
+  left: 478px;
+}
+
+.desktop-main-menu .button-music {
+  top: 295px;
+  left: 1340px;
+  position: absolute;
+  width: 432px;
+  height: 212px;
+}
+
+.desktop-main-menu .button-TV-controls {
+  position: absolute;
+  width: 432px;
+  height: 212px;
+  top: 295px;
+  left: 771px;
+}
+
+.desktop-main-menu .button-text-speech {
+  position: absolute;
+  width: 432px;
+  height: 212px;
+  top: 295px;
+  left: 191px;
+}

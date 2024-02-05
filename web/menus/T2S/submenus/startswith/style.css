@@ -1,0 +1,338 @@
+.desktop-text {
+  background-color: #cffcff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.desktop-text .div {
+  background-color: #cffcff;
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+}
+
+.desktop-text .button-go-back {
+  position: absolute;
+  width: 225px;
+  height: 150px;
+  top: 782px;
+  left: 292px;
+  overflow: hidden;
+}
+
+.desktop-text .group {
+  position: relative;
+  width: 222px;
+  height: 135px;
+  top: 5px;
+  left: 5px;
+}
+
+.desktop-text .overlap-group {
+  position: relative;
+  width: 220px;
+  height: 135px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px #00000040, inset 0px 4px 4px #00000040;
+}
+
+.desktop-text .text {
+  position: absolute;
+  width: 220px;
+  height: 135px;
+  top: 0;
+  left: 0;
+  font-family: "Work Sans", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.desktop-text .key-z {
+  top: 782px;
+  left: 180px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .overlap-group-wrapper {
+  position: relative;
+  width: 96px;
+  height: 84px;
+  top: 3px;
+  left: 3px;
+}
+
+.desktop-text .div-wrapper {
+  position: relative;
+  width: 94px;
+  height: 84px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px #00000040, inset 0px 4px 4px #00000040;
+}
+
+.desktop-text .text-wrapper {
+  position: absolute;
+  width: 67px;
+  height: 51px;
+  top: 17px;
+  left: 14px;
+  font-family: "Work Sans", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.desktop-text .key-y {
+  top: 782px;
+  left: 69px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-x {
+  top: 679px;
+  left: 402px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-w {
+  top: 679px;
+  left: 291px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-v {
+  top: 679px;
+  left: 180px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-u {
+  top: 679px;
+  left: 69px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-t {
+  top: 576px;
+  left: 402px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-s {
+  top: 576px;
+  left: 291px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-r {
+  top: 576px;
+  left: 180px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-q {
+  top: 576px;
+  left: 69px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-p {
+  top: 473px;
+  left: 402px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-o {
+  top: 473px;
+  left: 291px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-n {
+  top: 473px;
+  left: 180px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-m {
+  top: 473px;
+  left: 69px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-l {
+  top: 370px;
+  left: 402px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-k {
+  top: 370px;
+  left: 291px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-j {
+  top: 370px;
+  left: 180px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-i {
+  top: 370px;
+  left: 69px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-h {
+  top: 267px;
+  left: 402px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-g {
+  top: 267px;
+  left: 291px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-f {
+  top: 267px;
+  left: 180px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-e {
+  top: 267px;
+  left: 69px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-d {
+  top: 164px;
+  left: 402px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-c {
+  top: 164px;
+  left: 291px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-b {
+  top: 164px;
+  left: 180px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .key-a {
+  top: 164px;
+  left: 69px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+.desktop-text .words {
+  top: 164px;
+  left: 568px;
+  position: absolute;
+  width: 570px;
+  height: 732px;
+  background-color: #c3fbff;
+  box-shadow: inset 0px 4px 4px #00000040, 0px 4px 4px #00000040;
+}
+
+.desktop-text .words-2 {
+  top: 161px;
+  left: 1197px;
+  position: absolute;
+  width: 570px;
+  height: 732px;
+  background-color: #c3fbff;
+  box-shadow: inset 0px 4px 4px #00000040, 0px 4px 4px #00000040;
+}
+
+.desktop-text .page-title {
+  position: absolute;
+  width: 772px;
+  height: 82px;
+  top: 20px;
+  left: 596px;
+}
+
+.desktop-text .text-speech-it {
+  position: absolute;
+  width: 727px;
+  height: 82px;
+  top: -1px;
+  left: 22px;
+  font-family: "Work Sans", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}

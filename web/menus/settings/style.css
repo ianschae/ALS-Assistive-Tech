@@ -1,0 +1,243 @@
+.desktop-settings {
+  background-color: #cffcff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.desktop-settings .div {
+  background-color: #cffcff;
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+}
+
+.desktop-settings .button-go-back {
+  position: absolute;
+  width: 310px;
+  height: 150px;
+  top: 710px;
+  left: 1198px;
+}
+
+.desktop-settings .group {
+  position: relative;
+  width: 307px;
+  height: 135px;
+  top: 8px;
+  left: 2px;
+}
+
+.desktop-settings .overlap-group {
+  position: relative;
+  width: 305px;
+  height: 135px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px #00000040, inset 0px 4px 4px #00000040;
+}
+
+.desktop-settings .quick-phrases {
+  position: absolute;
+  width: 305px;
+  height: 135px;
+  top: 0;
+  left: 0;
+  font-family: "Work Sans", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.desktop-settings .keyboard-selection {
+  position: absolute;
+  width: 688px;
+  height: 206px;
+  top: 698px;
+  left: 397px;
+}
+
+.desktop-settings .switch-key-THAEL {
+  position: absolute;
+  width: 324px;
+  height: 206px;
+  top: 0;
+  left: 364px;
+}
+
+.desktop-settings .group-wrapper {
+  position: absolute;
+  width: 305px;
+  height: 135px;
+  top: 16px;
+  left: 10px;
+  background-color: #cfcdcd;
+  border-radius: 100px;
+  box-shadow: inset 0px 4px 4px #00000040, inset 0px 4px 4px #00000040, 0px 4px 4px #00000040;
+}
+
+.desktop-settings .overlap-group-wrapper {
+  position: relative;
+  width: 96px;
+  height: 94px;
+  top: 24px;
+  left: 188px;
+}
+
+.desktop-settings .div-wrapper {
+  position: relative;
+  width: 94px;
+  height: 94px;
+  background-color: #d9d9d9;
+  border-radius: 47px;
+  box-shadow: inset 0px 4px 4px #00000040, 0px 4px 4px #00000040;
+}
+
+.desktop-settings .text-wrapper {
+  position: absolute;
+  width: 93px;
+  height: 68px;
+  top: 13px;
+  left: 1px;
+  font-family: "Work Sans", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.desktop-settings .outer-text {
+  position: absolute;
+  width: 265px;
+  height: 33px;
+  top: 157px;
+  left: 38px;
+  font-family: "Work Sans", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+}
+
+.desktop-settings .div-2 {
+  position: absolute;
+  width: 324px;
+  height: 206px;
+  top: 0;
+  left: 0;
+}
+
+.desktop-settings .group-2 {
+  position: absolute;
+  width: 305px;
+  height: 135px;
+  top: 16px;
+  left: 10px;
+  background-color: #ffffff;
+  border-radius: 100px;
+  box-shadow: inset 0px 4px 4px #00000040, inset 0px 4px 4px #00000040, 0px 4px 4px #00000040;
+}
+
+.desktop-settings .group-3 {
+  position: relative;
+  width: 96px;
+  height: 94px;
+  top: 24px;
+  left: 24px;
+}
+
+.desktop-settings .speed-selection {
+  position: absolute;
+  width: 1420px;
+  height: 426px;
+  top: 217px;
+  left: 250px;
+}
+
+.desktop-settings .switch-speed-sec {
+  position: absolute;
+  width: 324px;
+  height: 206px;
+  top: 220px;
+  left: 1096px;
+}
+
+.desktop-settings .switch-speed-sec-2 {
+  position: absolute;
+  width: 324px;
+  height: 206px;
+  top: 220px;
+  left: 710px;
+}
+
+.desktop-settings .switch-speed-sec-3 {
+  position: absolute;
+  width: 324px;
+  height: 206px;
+  top: 220px;
+  left: 346px;
+}
+
+.desktop-settings .switch-speed-sec-4 {
+  position: absolute;
+  width: 324px;
+  height: 206px;
+  top: 220px;
+  left: 0;
+}
+
+.desktop-settings .switch-speed-sec-5 {
+  position: absolute;
+  width: 324px;
+  height: 206px;
+  top: 0;
+  left: 1096px;
+}
+
+.desktop-settings .switch-speed-sec-6 {
+  position: absolute;
+  width: 324px;
+  height: 206px;
+  top: 0;
+  left: 710px;
+}
+
+.desktop-settings .switch-speed-sec-7 {
+  position: absolute;
+  width: 324px;
+  height: 206px;
+  top: 0;
+  left: 346px;
+}
+
+.desktop-settings .page-title {
+  position: absolute;
+  width: 772px;
+  height: 82px;
+  top: 20px;
+  left: 574px;
+}
+
+.desktop-settings .text-wrapper-2 {
+  position: absolute;
+  width: 727px;
+  height: 82px;
+  top: -1px;
+  left: 22px;
+  font-family: "Work Sans", Helvetica;
+  font-weight: 600;
+  color: #000000;
+  font-size: 36px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: normal;
+}

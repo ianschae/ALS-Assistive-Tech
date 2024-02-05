@@ -94,7 +94,7 @@ function init() {
         resetCycle('main-menu')
     }
 }
-
+/*
 function setTime() {
     const currTime = new Date();
     let hr = currTime.getHours();
@@ -113,7 +113,7 @@ function setTime() {
     document.getElementById("time").innerHTML = "<h2>" + hr + ":" + min + " " + amPm + "</h2>";
     setTimeout(setTime, 1000);
 }
-
+*/
 function resetMouse(event){
     if (event != undefined) event.stopPropagation()
     eel.resetMouse()
@@ -159,14 +159,17 @@ function closeSubmenu(event, supermenuId, submenuId) {
     supermenu.style.visibility = 'visible'
 }
 
-function openPlugSubmenu(event, plugLabel) {
-    let titleElement = document.getElementById('plug-submenu-title')
-    titleElement.innerHTML = plugLabel == 'all' ? 'All Plugs' : plugLabels[plugLabel]
-    titleElement.parentElement.setAttribute('plug-label', plugLabel)
+function openSubmenu(event, supermenuId, submenuId) {
+    if (event != undefined) event.stopPropagation();
+    let supermenu = document.getElementById(supermenuId);
+    let submenu = document.getElementById(submenuId);
 
-    openSubmenu(event, 'plug-select', 'plug-submenu')
-    
+    if (supermenu && submenu) {
+        supermenu.style.display = 'none'; // Hide the supermenu
+        submenu.style.display = 'block'; // Show the submenu
+    }
 }
+
 
 /*
 --------------------------------------------------
@@ -241,203 +244,19 @@ function togglePlug(e, state) {
 Keyboard Globals
 --------------------------------------------------
 */
-let msgHistory = {
-    "topRow": ""
-    ,"middleRow": ""
-    ,"editRow": ""
+function addToPhrase(char) {
+    var textBox = document.getElementById("phrase-text-box");
+    textBox.innerText += char;
 }
-
-const msgElements = {
-    "topRow": document.getElementById("text-string-top")
-    ,"middleRow": document.getElementById("text-string-middle")
-    ,"editRow": document.getElementById("text-string-bottom")
-}
-
-let alphaKeyboardInnerHTML = `
-<div id="keyboard-row-1" class="keyboard-row alpha-keyboard-row">
-    <button id="done-key"       class="keyboard-button alpha-keyboard" onpointerdown="endNewMessage(event)">DONE</button>    
-    <button id="space-key"      class="keyboard-button alpha-keyboard" value=" " onpointerdown="updateEditString(event, this.value)">SPACE</button>    
-    <button id="delete-key"     class="keyboard-button alpha-keyboard" value="del" onpointerdown="updateEditString(event, this.value)">BKSP</button>
-    <button id="num-alpha-key"  class="keyboard-button alpha-keyboard" value="num" onpointerdown="changeAlphanumericMode(event, this.value)">NUM</button>
-</div>
-<div id="keyboard-row-2" class="keyboard-row alpha-keyboard-row">
-    <button id="A-key" class="keyboard-button alpha-key" value="A" onpointerdown="updateEditString(event, this.value)">A</button>
-    <button id="B-key" class="keyboard-button alpha-key" value="B" onpointerdown="updateEditString(event, this.value)">B</button>
-    <button id="C-key" class="keyboard-button alpha-key" value="C" onpointerdown="updateEditString(event, this.value)">C</button>
-    <button id="D-key" class="keyboard-button alpha-key" value="D" onpointerdown="updateEditString(event, this.value)">D</button>
-</div>
-<div id="keyboard-row-3" class="keyboard-row alpha-keyboard-row">
-    <button id="E-key" class="keyboard-button alpha-key" value="E" onpointerdown="updateEditString(event, this.value)">E</button>
-    <button id="F-key" class="keyboard-button alpha-key" value="F" onpointerdown="updateEditString(event, this.value)">F</button>
-    <button id="G-key" class="keyboard-button alpha-key" value="G" onpointerdown="updateEditString(event, this.value)">G</button>
-    <button id="H-key" class="keyboard-button alpha-key" value="H" onpointerdown="updateEditString(event, this.value)">H</button>
-</div>
-<div id="keyboard-row-4" class="keyboard-row alpha-keyboard-row">
-    <button id="I-key" class="keyboard-button alpha-key" value="I" onpointerdown="updateEditString(event, this.value)">I</button>
-    <button id="J-key" class="keyboard-button alpha-key" value="J" onpointerdown="updateEditString(event, this.value)">J</button>
-    <button id="K-key" class="keyboard-button alpha-key" value="K" onpointerdown="updateEditString(event, this.value)">K</button>
-    <button id="L-key" class="keyboard-button alpha-key" value="L" onpointerdown="updateEditString(event, this.value)">L</button>
-</div>
-<div id="keyboard-row-5" class="keyboard-row alpha-keyboard-row">
-    <button id="M-key" class="keyboard-button alpha-key" value="M" onpointerdown="updateEditString(event, this.value)">M</button>
-    <button id="N-key" class="keyboard-button alpha-key" value="N" onpointerdown="updateEditString(event, this.value)">N</button>
-    <button id="O-key" class="keyboard-button alpha-key" value="O" onpointerdown="updateEditString(event, this.value)">O</button>
-    <button id="P-key" class="keyboard-button alpha-key" value="P" onpointerdown="updateEditString(event, this.value)">P</button>
-</div>
-<div id="keyboard-row-6" class="keyboard-row alpha-keyboard-row">
-    <button id="Q-key" class="keyboard-button alpha-key" value="Q" onpointerdown="updateEditString(event, this.value)">Q</button>
-    <button id="R-key" class="keyboard-button alpha-key" value="R" onpointerdown="updateEditString(event, this.value)">R</button>
-    <button id="S-key" class="keyboard-button alpha-key" value="S" onpointerdown="updateEditString(event, this.value)">S</button>
-    <button id="T-key" class="keyboard-button alpha-key" value="T" onpointerdown="updateEditString(event, this.value)">T</button>
-</div>
-<div id="keyboard-row-7" class="keyboard-row alpha-keyboard-row">
-    <button id="U-key" class="keyboard-button alpha-key" value="U" onpointerdown="updateEditString(event, this.value)">U</button>
-    <button id="V-key" class="keyboard-button alpha-key" value="V" onpointerdown="updateEditString(event, this.value)">V</button>
-    <button id="W-key" class="keyboard-button alpha-key" value="W" onpointerdown="updateEditString(event, this.value)">W</button>
-    <button id="X-key" class="keyboard-button alpha-key" value="X" onpointerdown="updateEditString(event, this.value)">X</button>
-</div>
-<div id="keyboard-row-8" class="keyboard-row alpha-keyboard-row">
-    <button id="Y-key" class="keyboard-button alpha-key" value="Y" onpointerdown="updateEditString(event, this.value)">Y</button>
-    <button id="Z-key" class="keyboard-button alpha-key" value="Z" onpointerdown="updateEditString(event, this.value)">Z</button>
-    <button id="period-key"      class="keyboard-button" value="." onpointerdown="updateEditString(event, this.value)">.</button>
-    <button id="question-mark-key"  class="keyboard-button" value="?" onpointerdown="updateEditString(event, this.value)">?</button>
-</div>
-`
-
-let numericKeyboardInnerHTML = `
-<div id="keyboard-row-1" class="keyboard-row num-keyboard-row">
-    <button id="done-key"       class="keyboard-button alpha-keyboard" onpointerdown="endNewMessage(event)">DONE</button>    
-    <button id="space-key"      class="keyboard-button alpha-keyboard" value=" " onpointerdown="updateEditString(event, this.value)">SPACE</button>    
-    <button id="delete-key"     class="keyboard-button alpha-keyboard" value="del" onpointerdown="updateEditString(event, this.value)">BKSP</button>
-    <button id="num-alpha-key"  class="keyboard-button alpha-keyboard" value="alpha" onpointerdown="changeAlphanumericMode(event, this.value)">ALPHA</button>
-</div>
-<div id="keyboard-row-2" class="keyboard-row num-keyboard-row">
-    <button id="1-key" class="keyboard-button alpha-key" value="1" onpointerdown="updateEditString(event, this.value)">1</button>
-    <button id="2-key" class="keyboard-button alpha-key" value="2" onpointerdown="updateEditString(event, this.value)">2</button>
-    <button id="3-key" class="keyboard-button alpha-key" value="3" onpointerdown="updateEditString(event, this.value)">3</button>
-    <button id="4-key" class="keyboard-button alpha-key" value="4" onpointerdown="updateEditString(event, this.value)">4</button>
-</div>
-<div id="keyboard-row-3" class="keyboard-row num-keyboard-row">
-    <button id="5-key" class="keyboard-button alpha-key" value="5" onpointerdown="updateEditString(event, this.value)">5</button>
-    <button id="6-key" class="keyboard-button alpha-key" value="6" onpointerdown="updateEditString(event, this.value)">6</button>
-    <button id="7-key" class="keyboard-button alpha-key" value="7" onpointerdown="updateEditString(event, this.value)">7</button>
-    <button id="8-key" class="keyboard-button alpha-key" value="8" onpointerdown="updateEditString(event, this.value)">8</button>
-</div>
-<div id="keyboard-row-4" class="keyboard-row num-keyboard-row">
-    <button id="9-key" class="keyboard-button alpha-key" value="9" onpointerdown="updateEditString(event, this.value)">9</button>
-    <button id="0-key" class="keyboard-button alpha-key" value="0" onpointerdown="updateEditString(event, this.value)">0</button>
-    <button id=".-key" class="keyboard-button alpha-key" value="." onpointerdown="updateEditString(event, this.value)">.</button>
-    <button id="$-key" class="keyboard-button alpha-key" value="$" onpointerdown="updateEditString(event, this.value)">$</button>
-</div>
-<div id="keyboard-row-5" class="keyboard-row num-keyboard-row">
-<button id="comma-key" class="keyboard-button alpha-key" value="," onpointerdown="updateEditString(event, this.value)">,</button>
-<button id="colon-key" class="keyboard-button alpha-key" value=":" onpointerdown="updateEditString(event, this.value)">:</button>
-    <button id="AM-key" class="keyboard-button alpha-key" value="AM" onpointerdown="updateEditString(event, this.value)">AM</button>
-    <button id="PM-key" class="keyboard-button alpha-key" value="PM" onpointerdown="updateEditString(event, this.value)">PM</button>
-</div> 
-`
-
-let keyboardSuperMenuInnerHTML =`
-<button id="keyboard-new-btn"  class="menu-button" onpointerdown="startNewMessage(event)">NEW</button>
-<button id="keyboard-menu-btn" class="menu-button" onpointerdown="closeSubmenu(event, 'main-menu', 'keyboard-menu')">MENU</button>
-`
-
-let kbAttachPoint = document.getElementById('keyboard-attach-point')
-let editString = ""
-let charLimit = 30
-const positionIndicator = "|"
-
 /*
 --------------------------------------------------
 Keyboard Functions
 --------------------------------------------------
 */
 
-const updateEditRowDisplay = () => {
-    msgElements["editRow"].innerText  =  editString + positionIndicator
-}
-
-const startNewMessage = (e) => {
-    resetMouse(e)
-    // Update the message history and clear row that will be edited.
-    msgElements["topRow"].innerText    = msgElements["middleRow"].innerText
-    msgElements["middleRow"].innerText = msgElements["editRow"].innerText
-    
-    editString = "" // Clear the string that will be modified by keypresses
-    updateEditRowDisplay()
- 
-    // Show keyboard
-    kbAttachPoint.innerHTML = alphaKeyboardInnerHTML
-    // setKeyboardRowCycle() // Used with grid select keyboard
-    janesKeyboardSelection()
-}
-
-
-const endNewMessage = (e) => {
-    if (e != undefined) e.stopPropagation()
-    resetMouse(e)
-
-    // Update the message strings in memory and call eel function to save messge history.
-    msgHistory["topRow"]    = msgElements["topRow"].innerText
-    msgHistory["middleRow"] = msgElements["middleRow"].innerText
-    msgHistory["editRow"]   = editString
-
-    // Remove the position indicator
-    msgElements["editRow"].innerText  =  editString
-
-    // Call eel update function when available
-
-    kbAttachPoint.innerHTML = keyboardSuperMenuInnerHTML
-    resetCycle("keyboard-menu")
-}
-
-const updateEditString = (e,char) => {
-    if (e != undefined) e.stopPropagation()
-    resetMouse(e)
-    if (char != 'del') {
-        editString += char
-        if (editString.length >= charLimit){
-            var splitter = editString.indexOf(' ') >=0 ? editString.lastIndexOf(' '): 44
-            var spillover = editString.substring(splitter)
-            editString = editString.substring(0, splitter)
-            endNewMessage(e)
-            startNewMessage()
-            editString = spillover
-        }
-    } else {
-        if (editString.length > 0) editString = editString.slice(0, -1)
-    }
- 
-    updateEditRowDisplay()
-    resetCycle('dynamic-kb')
-    // setKeyboardRowCycle() // Used with grid select keyboard
-}
-
-const changeAlphanumericMode = (e, mode) => {
-    if (e != undefined) e.stopPropagation()
-    resetMouse(e)
-    if (mode == 'num') {
-        kbAttachPoint.innerHTML = numericKeyboardInnerHTML
-    } else if (mode == 'alpha') {
-        kbAttachPoint.innerHTML = alphaKeyboardInnerHTML
-    }
-    // setKeyboardRowCycle() // Use with grid select keyboard
-    janesKeyboardSelection()
-}
 
 // janesKeyboardSelection is custom to a request by Jane and her caretakers. This goes through all
 // keys one at a time to select the button needed.
-const janesKeyboardSelection = () => {
-    if (singleInputMode) {
-        const newArr = document.getElementsByClassName('keyboard-button')
-        dynamicKeyboardOrder = []
-        for (let ele of newArr) {
-            dynamicKeyboardOrder.push(ele.id)
-        }
-        menuIdMapping['dynamic-kb'] = dynamicKeyboardOrder
-        resetCycle('dynamic-kb')
-    }
-}
 
 
 // The following two functions (setKeyboardRowCycle and setKeyboardButtonCycle) allow the device
@@ -465,6 +284,29 @@ const setKeyboardButtonCycle = (ele) => {
     resetCycle("dynamic-kb")
 }
 
+/*
+MUSIC PLAYER CONTROL FUNCTIONS
+
+*/
+function playSong(filePath) {
+    eel.play_song(filePath); // filePath is the path to the song file
+}
+
+function pauseSong() {
+    eel.pause_song();
+}
+
+function stopSong() {
+    eel.stop_song();
+}
+
+function nextSong() {
+    eel.next_song(); // Function to play the next song
+}
+
+function previousSong() {
+    eel.previous_song(); // Function to play the previous song
+}
 /*
 --------------------------------------------------
 Config
