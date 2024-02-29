@@ -2,719 +2,903 @@
 <html lang="en">
 
 <head>
-    <!-- Not sure if the code between these is needed -->
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="device-width", initial-scale=1.0>
-    <title>Assistive Tech UI</title>
-    <!-- Not sure if the code between these is needed -->
+  <!-- Not sure if the code between these is needed -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="device-width" , initial-scale=1.0>
+  <title>Assistive Tech UI</title>
+  <!-- Not sure if the code between these is needed -->
 
-    <link rel="stylesheet" href="css/globals.css" type="text/css" />
-    <link rel="stylesheet" href="css/new_style.css" type="text/css" />
+  <link rel="stylesheet" href="css/globals.css" type="text/css" />
+  <link rel="stylesheet" href="css/new_style.css" type="text/css" />
 </head>
 
 <body onload="init()" oncontextmenu="return false;">
   <!--MAIN MENU BUTTONS-->
-    <div class = "desktop-main-menu" id ="main-menu">
-        <div class="div">
-          <!--PAGE TITLE-->
+  <div class="desktop-main-menu" id="main-menu">
+    <div class="div">
+      <!--PAGE TITLE-->
+      <div class="page-title">
+        <div class="text-wrapper">
+          Main Menu
+        </div>
+      </div>
+      <!--TEXT-2-SPEECH MAIN MENU BUTTON-->
+      <div id="button-text-speech" class="button-text-speech"
+        onclick="openSubmenu(event, 'main-menu', 'text-2-speech')">
+        <div class="group">
+          <div class="overlap-group">
+            <div class="text-wrapper-2">Text-2-speech</div>
+          </div>
+        </div>
+      </div>
+      <!--TV CONTROLS MAIN MENU BUTTON-->
+      <div id="button-TV-controls" class="button-TV-controls"
+        onclick="openSubmenu(event,'main-menu', 'tv-control-menu')">
+        <div class="group">
+          <div class="overlap-group">
+            <div class="text-wrapper-2">Tv Controls</div>
+          </div>
+        </div>
+      </div>
+      <!--MUSIC CONTROL MAIN MENU BUTTON-->
+      <div id="button-music" class="button-music" onclick="openSubmenu(event,'main-menu','music-menu')">
+        <div class="group">
+          <div class="overlap-group">
+            <div class="text-wrapper-2">Music</div>
+          </div>
+        </div>
+      </div>
+      <!--OUTLET MAIN MENU BUTTON -->
+      <div id="button-outlet" class="button-outlet" onclick="openSubmenu(event,'main-menu','outlet-menu')">
+        <div class="group">
+          <div class="overlap-group">
+            <div class="text-wrapper-2">Outlet Controls</div>
+          </div>
+        </div>
+      </div>
+      <!--SETTINGS MAIN MENU BUTTON-->
+      <div id="button-settings" class="button-settings" onclick="openSubmenu(event,'main-menu','settings-page')">
+        <div class="group">
+          <div class="overlap-group">
+            <div class="text-wrapper-2">Settings
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--TEXT-2-SPEECH MENU-->
+  <div class="desktop-text" id="text-2-speech">
+    <div class="overlap-wrapper">
+      <div class="overlap">
+        <div class="overlap-group">
+          <div id="keyboard" class="keyboard">
+            <div class="div">
+              <div class="overlap-2">
+                <div id="row" class="row">
+                  <div id="key-q" class="key-q">
+                    <div class="group">
+                      <button class="div-wrapper" onclick="addToPhrase('Q');">
+                        <div class="text-wrapper">Q</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-w" class="key-w">
+                    <div class="group">
+                      <button class="div-wrapper" onclick="addToPhrase('W');">
+                        <div class="text-wrapper-2">W</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-e" class="key-e">
+                    <div class="group">
+                      <button class="div-wrapper" onclick="addToPhrase('E');">
+                        <div class="text-wrapper-3">E</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-r" class="key-r">
+                    <div class="group">
+                      <button class="div-wrapper" onclick="addToPhrase('R');">
+                        <div class="text-wrapper-4">R</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-t" class="key-t">
+                    <div class="group">
+                      <button class="div-wrapper" onclick="addToPhrase('T');">
+                        <div class="text-wrapper-5">T</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-y" class="key-y">
+                    <div class="group">
+                      <button class="div-wrapper" onclick="addToPhrase('Y');">
+                        <div class="text-wrapper-3">Y</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-u" class="key-u">
+                    <div class="group">
+                      <button class="div-wrapper" onclick="addToPhrase('U');">
+                        <div class="text-wrapper-6">U</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-i" class="key-i">
+                    <div class="group">
+                      <button class="div-wrapper" onclick="addToPhrase('I');">
+                        <div class="text-wrapper-7">I</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-o" class="key-o">
+                    <div class="group">
+                      <button class="div-wrapper" onclick="addToPhrase('O');">
+                        <div class="text-wrapper-8">O</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-p" class="key-p">
+                    <div class="group">
+                      <button class="div-wrapper" onclick="addToPhrase('P');">
+                        <div class="text-wrapper-9">P</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="auto-1" class="key-auto">
+                    <div class="overlap-group-wrapper">
+                      <!--ADD AUTO FUNCTIONALITY HERE FOR FIRST ROW-->
+                      <button class="overlap-group-2">
+                        <div class="text-wrapper-10">Auto</div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div id="row-2" class="row-2">
+                  <div id="key-a" class="key-a">
+                    <div class="group-2">
+                      <button class="div-wrapper" onclick="addToPhrase('A');">
+                        <div class="text-wrapper-11">A</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-s" class="key-s">
+                    <div class="group-2">
+                      <button class="div-wrapper" onclick="addToPhrase('S');">
+                        <div class="text-wrapper-9">S</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-d" class="key-d">
+                    <div class="group-2">
+                      <button class="div-wrapper" onclick="addToPhrase('D');">
+                        <div class="text-wrapper-6">D</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-f" class="key-f">
+                    <div class="group-2">
+                      <button class="div-wrapper" onclick="addToPhrase('F');">
+                        <div class="text-wrapper-3">F</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-g" class="key-g">
+                    <div class="group-2">
+                      <button class="div-wrapper" onclick="addToPhrase('G');">
+                        <div class="text-wrapper-8">G</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-h" class="key-h">
+                    <div class="group-2">
+                      <button class="div-wrapper" onclick="addToPhrase('H');">
+                        <div class="text-wrapper-8">H</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-j" class="key-j">
+                    <div class="group-2">
+                      <button class="div-wrapper" onclick="addToPhrase('J');">
+                        <div class="text-wrapper-12">J</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-k" class="key-k">
+                    <div class="group-2">
+                      <button class="div-wrapper" onclick="addToPhrase('K');">
+                        <div class="text-wrapper-11">K</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div id="key-l" class="key-l">
+                    <div class="group-2">
+                      <button class="div-wrapper" onclick="addToPhrase('L');">
+                        <div class="text-wrapper-13">L</div>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="group-wrapper">
+                    <div class="overlap-group-wrapper">
+                      <!--ADD AUTO FUNCTIONALITY HERE-->
+                      <button class="overlap-group-2">
+                        <div class="text-wrapper-10">Auto</div>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="row-3" class="row-3">
+                <div class="group-wrapper-2">
+                  <div class="img-wrapper"><img class="shift" src="shift-1.png" /></div>
+                </div>
+                <div id="key-z" class="key-z">
+                  <div class="group-2">
+                    <button class="div-wrapper" onclick="addToPhrase('Z');">
+                      <div class="text-wrapper-3">Z</div>
+                    </button>
+                  </div>
+                </div>
+                <div id="key-x" class="key-x">
+                  <div class="group-2">
+                    <button class="div-wrapper" onclick="addToPhrase('X');">
+                      <div class="text-wrapper-9">X</div>
+                    </button>
+                  </div>
+                </div>
+                <div id="key-c" class="key-c">
+                  <div class="group-2">
+                    <button class="div-wrapper" onclick="addToPhrase('C');">
+                      <div class="text-wrapper-11">C</div>
+                    </button>
+                  </div>
+                </div>
+                <div id="key-v" class="key-v">
+                  <div class="group-2">
+                    <button class="div-wrapper" onclick="addToPhrase('V');">
+                      <div class="text-wrapper-11">V</div>
+                    </button>
+                  </div>
+                </div>
+                <div id="key-b" class="key-b">
+                  <div class="group-2">
+                    <button class="div-wrapper" onclick="addToPhrase('B');">
+                      <div class="text-wrapper-11">B</div>
+                    </button>
+                  </div>
+                </div>
+                <div id="key-n" class="key-n">
+                  <div class="group-2">
+                    <button class="div-wrapper" onclick="addToPhrase('N');">
+                      <div class="text-wrapper-8">N</div>
+                    </button>
+                  </div>
+                </div>
+                <div id="key-m" class="key-m">
+                  <div class="group-2">
+                    <button class="div-wrapper" onclick="addToPhrase('M');">
+                      <div class="text-wrapper-14">M</div>
+                    </button>
+                  </div>
+                </div>
+                <div id="key-backspace" class="key-backspace">
+                  <!--ADD BACKSPACE FUNCTIONALITY HERE IN SCRIPT.JS FOR DELETING CHARACTER-->
+                  <button class="img-wrapper"><img class="backspace" src="backspace-1.png" /></button>
+                </div>
+                <div id="key-auto-2" class="key-auto-2">
+                  <div class="overlap-group-wrapper">
+                    <!--ADD AUTO FUNCTIONALITY HERE-->
+                    <button class="overlap-group-2">
+                      <div class="text-wrapper-10">Auto</div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div id="row-4" class="row-4">
+                <div class="group-wrapper-2">
+                  <div class="group-2">
+                    <button id="key-1" class="div-wrapper" onclick="addToPhrase('1');">
+                      <div class="text-wrapper-11">1</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="key">
+                  <div class="group-2">
+                    <button id="key-2" class="div-wrapper" onclick="addToPhrase('2');">
+                      <div class="text-wrapper-15">2</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="key-2">
+                  <div class="group-2">
+                    <button id=key-3 class="div-wrapper" onclick="addToPhrase('3');">
+                      <div class="text-wrapper-16">3</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="key-3">
+                  <div class="group-2">
+                    <button id="key-4" class="div-wrapper" onclick="addToPhrase('4');">
+                      <div class="text-wrapper-17">4</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="key-4">
+                  <div class="group-2">
+                    <button id="key-5" class="div-wrapper" onclick="addToPhrase('5');">
+                      <div class="text-wrapper-18">5</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="key-5">
+                  <div class="group-2">
+                    <button id="key-6" class="div-wrapper" onclick="addToPhrase('6');">
+                      <div class="text-wrapper-18">6</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="key-6">
+                  <div class="group-2">
+                    <button id="key-7" class="div-wrapper" onclick="addToPhrase('7');">
+                      <div class="text-wrapper-12">7</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="key-7">
+                  <div class="group-2">
+                    <button id="key-8" class="div-wrapper" onclick="addToPhrase('8');">
+                      <div class="text-wrapper-4">8</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="key-8">
+                  <div class="group-2">
+                    <button id="key-9" class="div-wrapper" onclick="addToPhrase('9');">
+                      <div class="text-wrapper-12">9</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="key-9">
+                  <div class="group-2">
+                    <button id="key-0" class="div-wrapper" onclick="addToPhrase('0');">
+                      <div class="text-wrapper-12">0</div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row-5">
+                <div class="key-speak-it">
+                  <div class="group-3">
+                    <!--ADD FUNCTIONALITY TO COLLECT STRING FROM TEXT PHRASE BOX AND PASS TO TEXT TO SPEECH-->
+                    <button id="key-speak-it" onclick="speakPhrase()" class="speak-it-wrapper">
+                      <div class="speak-it">Speak It</div>
+                    </button>
+                  </div>
+                </div>
+                <div class="key-space">
+                  <div class="group-4">
+                    <div class="overlap-group-3">
+                      <button id="key-space" onclick="addToPhrase(' ')" class="rectangle"></button>
+                      <!--ADD FUNCTIONALITY FOR SPACE KEY-->
+                      <div onclick="addToPhrase(' ')" class="text-wrapper-19">Space / New Word</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="key-new-phrase">
+                  <div class="group-5">
+                    <!--NOT SURE WHAT NEW PHRASE IS SUPPOSED TO DO, CLEAR THE STRING FUNCTIONALITY SHOULD BE ADDED HERE IG-->
+                    <button id="key-new-phrase" class="overlap-group-4" onclick="clearPhrase()">
+                      <div class="text-wrapper-20">New Phrase</div>
+                    </button>
+                  </div>
+                </div>
+                <div id="key-go-back" class="key-go-back">
+                  <button class="img-wrapper"><img class="go-back-icon" src="img/go-back-icon-1.svg" /></button>
+                </div>
+              </div>
+              <div class="phrase-text">
+                <!--THIS IS WHERE THE TEXT BOX IS, CHANGE CSS TO MAKE THE TEXT LOOK BETTER IN THE TEXT BOX LATER-->
+                <div class="phrase" id="phrase-text-box" contenteditable="true"></div>
+              </div>
+              <!--THIS IS WHERE PREDICTIVE TEXT FUNCTIONALITY WILL GO, THIS WILL NEED TO BE DONE IN JAVASCRIPT, *MAY BE VERY INVOLVED*-->
+              <div class="predictive-text">
+                <div class="prediction"></div>
+                <div class="prediction-2"></div>
+                <div class="prediction-3"></div>
+              </div>
+            </div>
+          </div>
+          <div class="button-main-menu">
+            <div class="group-6">
+              <button id="button-main-menu class="overlap-group-5" onclick="openSubmenu(event, 'text-2-speech','main-menu')">
+                <div class="text-wrapper-21">Main Menu</div>
+              </button>
+            </div>
+          </div>
+          <div class="button-large">
+            <div class="group-6">
+              <button id="key-quick-phrases" class="overlap-group-5">
+                <div class="text-wrapper-21">Quick Phrases</div>
+              </button>
+            </div>
+          </div>
           <div class="page-title">
-            <div class="text-wrapper">
-            Main Menu
-            </div>
-        </div >
-        <!--TEXT-2-SPEECH MAIN MENU BUTTON-->
-        <div class="button-text-speech" 
-            onclick="openSubmenu(event, 'main-menu', 'text-2-speech')">
-            <div class="group">
-                <div class="overlap-group">
-                    <div class="text-wrapper-2">Text-2-speech</div>
-                </div>
-            </div>
+            <div class="text-speech">Text-2-speech</div>
           </div>
-          <!--TV CONTROLS MAIN MENU BUTTON-->
-          <div class="button-TV-controls"
-              onclick="openSubmenu(event,'main-menu', 'tv-control-menu')">
-            <div class="group">
-              <div class="overlap-group"><div class="text-wrapper-2">Tv Controls</div></div>
-            </div>
+        </div>
+        <div class="button-settings">
+          <div class="group-7">
+            <button id="key-button-settings" class="overlap-group-6" onclick="openSubmenu(event,'text-2-speech','settings-page')">
+              <div class="text">Settings</div>
+            </button>
           </div>
-          <!--MUSIC CONTROL MAIN MENU BUTTON-->
-          <div class="button-music" onclick="openSubmenu(event,'main-menu','music-menu')">
-            <div class="group">
-              <div class="overlap-group"><div class="text-wrapper-2">Music</div></div>
-            </div>
+        </div>
+        <div class="button-outlet">
+          <div class="group-7">
+            <button id="key-button-outlet" class="overlap-group-6" onclick="openSubmenu(event,'text-2-speech','outlet-menu')">
+              <div class="text">Outlet Controls</div>
+            </button>
           </div>
-          <!--OUTLET MAIN MENU BUTTON -->
-          <div class="button-outlet" onclick="openSubmenu(event,'main-menu','outlet-menu')">
-            <div class="group">
-              <div class="overlap-group"><div class="text-wrapper-2">Outlet Controls</div></div>
-            </div>
+        </div>
+        <div class="button-music">
+          <div class="group-7">
+            <button id="key-button-music" class="overlap-group-6" onclick="openSubmenu(event,'text-2-speech','music-menu')">
+              <div class="text">Music</div>
+            </button>
           </div>
-          <!--SETTINGS MAIN MENU BUTTON-->
-          <div class="button-settings" onclick="openSubmenu(event,'main-menu','settings-page')">
-            <div class="group">
-              <div class="overlap-group" >
-                <div class="text-wrapper-2">Settings
-                  </div>
-                </div>
-            </div>
+        </div>
+        <div class="button-TV-controls">
+          <div class="group-7">
+            <button id="key-button-tv-controls" class="overlap-group-6" onclick="openSubmenu(event,'text-2-speech','tv-control-menu')">
+              <div class="text">Tv Controls</div>
+            </button>
+          </div>
+        </div>
+        <div class="button-ask-something">
+          <div class="group-7">
+            <!--ADD FUNCTIONALITY TO TEXT-2-SPEECH BACKEND TO AUTOMATICALLY SAY OUT LOUD-->
+            <button id="key-button-ask-something" onclick="speakCanIAsk()" class="overlap-group-6">
+              <p class="text">I’d Like To Ask You Something</p>
+            </button>
+          </div>
+        </div>
+        <div onclick="speakItStarts()" class="button-starts-with">
+          <div class="group-7">
+            <button id="key-button-starts-with" class="overlap-group-6">
+              <div class="text">It Starts With ...</div>
+            </button>
+          </div>
+        </div>
+        <div onclick="speakNo()" class="button-no">
+          <div class="group-7">
+            <!--ADD FUNCTIONALITY TO TEXT-2-SPEECH BACKEND TO AUTOMATICALLY SAY NO OUT LOUD-->
+            <button id="key-no" class="overlap-group-6">
+              <div class="text">No</div>
+            </button>
+          </div>
+        </div>
+        <div onclick="speakYes()" class="button-yes">
+          <div class="group-7">
+            <!--ADD FUNCTIONALITY TO TEXT-2-SPEECH BACKEND TO AUTOMATICALLY SAY YES OUT LOUD-->
+            <button id="key-yes" class="overlap-group-6">
+              <div class="text">Yes</div>
+            </button>
           </div>
         </div>
       </div>
-      
-      <!--TEXT-2-SPEECH MENU-->
-      <div class="desktop-text" id = "text-2-speech">
-        <div class="overlap-wrapper">
-          <div class="overlap">
-            <div class="overlap-group">
-              <div class="keyboard">
-                <div class="div">
-                  <div class="overlap-2">
-                    <div class="row">
-                      <div class="key-q">
-                        <div class="group">
-                          <button class="div-wrapper" onclick="addToPhrase('Q');"><div class="text-wrapper">Q</div></button>
-                        </div>
-                      </div>
-                      <div class="key-w">
-                        <div class="group">
-                          <button class="div-wrapper" onclick="addToPhrase('W');"><div class="text-wrapper-2">W</div></button>
-                        </div>
-                      </div>
-                      <div class="key-e">
-                        <div class="group">
-                          <button class="div-wrapper" onclick="addToPhrase('E');"><div class="text-wrapper-3">E</div></button>
-                        </div>
-                      </div>
-                      <div class="key-r">
-                        <div class="group">
-                          <button class="div-wrapper" onclick="addToPhrase('R');"><div class="text-wrapper-4">R</div></button>
-                        </div>
-                      </div>
-                      <div class="key-t">
-                        <div class="group">
-                          <button class="div-wrapper" onclick="addToPhrase('T');"><div class="text-wrapper-5">T</div></button>
-                        </div>
-                      </div>
-                      <div class="key-y">
-                        <div class="group">
-                          <button class="div-wrapper" onclick="addToPhrase('Y');"><div class="text-wrapper-3">Y</div></button>
-                        </div>
-                      </div>
-                      <div class="key-u">
-                        <div class="group">
-                          <button class="div-wrapper" onclick="addToPhrase('U');"><div class="text-wrapper-6">U</div></button>
-                        </div>
-                      </div>
-                      <div class="key-i">
-                        <div class="group">
-                          <button class="div-wrapper" onclick="addToPhrase('I');"><div class="text-wrapper-7">I</div></button>
-                        </div>
-                      </div>
-                      <div class="key-o">
-                        <div class="group">
-                          <button class="div-wrapper" onclick="addToPhrase('O');"><div class="text-wrapper-8">O</div></button>
-                        </div>
-                      </div>
-                      <div class="key-p">
-                        <div class="group">
-                          <button class="div-wrapper" onclick="addToPhrase('P');"><div class="text-wrapper-9">P</div></button>
-                        </div>
-                      </div>
-                      <div class="key-auto">
-                        <div class="overlap-group-wrapper">
-                          <!--ADD AUTO FUNCTIONALITY HERE FOR FIRST ROW-->
-                          <button class="overlap-group-2"><div class="text-wrapper-10">Auto</div></button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row-2">
-                      <div class="key-a">
-                        <div class="group-2">
-                          <button class="div-wrapper" onclick="addToPhrase('A');"><div class="text-wrapper-11">A</div></button>
-                        </div>
-                      </div>
-                      <div class="key-s">
-                        <div class="group-2">
-                          <button class="div-wrapper" onclick="addToPhrase('S');"><div class="text-wrapper-9">S</div></button>
-                        </div>
-                      </div>
-                      <div class="key-d">
-                        <div class="group-2">
-                          <button class="div-wrapper" onclick="addToPhrase('D');"><div class="text-wrapper-6">D</div></button>
-                        </div>
-                      </div>
-                      <div class="key-f">
-                        <div class="group-2">
-                          <button class="div-wrapper" onclick="addToPhrase('F');"><div class="text-wrapper-3">F</div></button>
-                        </div>
-                      </div>
-                      <div class="key-g">
-                        <div class="group-2">
-                          <button class="div-wrapper" onclick="addToPhrase('G');"><div class="text-wrapper-8">G</div></button>
-                        </div>
-                      </div>
-                      <div class="key-h">
-                        <div class="group-2">
-                          <button class="div-wrapper" onclick="addToPhrase('H');"><div class="text-wrapper-8">H</div></button>
-                        </div>
-                      </div>
-                      <div class="key-j">
-                        <div class="group-2">
-                          <button class="div-wrapper" onclick="addToPhrase('J');"><div class="text-wrapper-12">J</div></button>
-                        </div>
-                      </div>
-                      <div class="key-k">
-                        <div class="group-2">
-                          <button class="div-wrapper" onclick="addToPhrase('K');"><div class="text-wrapper-11">K</div></button>
-                        </div>
-                      </div>
-                      <div class="key-l">
-                        <div class="group-2">
-                          <button class="div-wrapper" onclick="addToPhrase('L');"><div class="text-wrapper-13">L</div></button>
-                        </div>
-                      </div>
-                      <div class="group-wrapper">
-                        <div class="overlap-group-wrapper">
-                          <!--ADD AUTO FUNCTIONALITY HERE-->
-                          <button class="overlap-group-2"><div class="text-wrapper-10">Auto</div></button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row-3">
-                    <div class="group-wrapper-2">
-                      <div class="img-wrapper"><img class="shift" src="img/shift-1.svg" /></div>
-                    </div>
-                    <div class="key-z">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('Z');"><div class="text-wrapper-3">Z</div></button>
-                      </div>
-                    </div>
-                    <div class="key-x">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('X');"><div class="text-wrapper-9">X</div></button>
-                      </div>
-                    </div>
-                    <div class="key-c">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('C');"><div class="text-wrapper-11">C</div></button>
-                      </div>
-                    </div>
-                    <div class="key-v">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('V');"><div class="text-wrapper-11">V</div></button>
-                      </div>
-                    </div>
-                    <div class="key-b">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('B');"><div class="text-wrapper-11">B</div></button>
-                      </div>
-                    </div>
-                    <div class="key-n">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('N');"><div class="text-wrapper-8">N</div></button>
-                      </div>
-                    </div>
-                    <div class="key-m">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('M');"><div class="text-wrapper-14">M</div></button>
-                      </div>
-                    </div>
-                    <div class="key-backspace">
-                      <!--ADD BACKSPACE FUNCTIONALITY HERE IN SCRIPT.JS FOR DELETING CHARACTER-->
-                      <button class="img-wrapper"><img class="backspace" src="img/backspace-1.svg" /></button>
-                    </div>
-                    <div class="key-auto-2">
-                      <div class="overlap-group-wrapper">
-                        <!--ADD AUTO FUNCTIONALITY HERE-->
-                        <button class="overlap-group-2"><div class="text-wrapper-10">Auto</div></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row-4">
-                    <div class="group-wrapper-2">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('1');"><div class="text-wrapper-11">1</div></button>
-                      </div>
-                    </div>
-                    <div class="key">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('2');"><div class="text-wrapper-15">2</div></button>
-                      </div>
-                    </div>
-                    <div class="key-2">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('3');"><div class="text-wrapper-16">3</div></button>
-                      </div>
-                    </div>
-                    <div class="key-3">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('4');"><div class="text-wrapper-17">4</div></button>
-                      </div>
-                    </div>
-                    <div class="key-4">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('5');"><div class="text-wrapper-18">5</div></button>
-                      </div>
-                    </div>
-                    <div class="key-5">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('6');"><div class="text-wrapper-18">6</div></button>
-                      </div>
-                    </div>
-                    <div class="key-6">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('7');"><div class="text-wrapper-12">7</div></button>
-                      </div>
-                    </div>
-                    <div class="key-7">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('8');"><div class="text-wrapper-4">8</div></button>
-                      </div>
-                    </div>
-                    <div class="key-8">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('9');"><div class="text-wrapper-12">9</div></button>
-                      </div>
-                    </div>
-                    <div class="key-9">
-                      <div class="group-2">
-                        <button class="div-wrapper" onclick="addToPhrase('0');"><div class="text-wrapper-12">0</div></button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row-5">
-                    <div class="key-speak-it">
-                      <div class="group-3">
-                        <!--ADD FUNCTIONALITY TO COLLECT STRING FROM TEXT PHRASE BOX AND PASS TO TEXT TO SPEECH-->
-                        <button onclick="speakPhrase()" class="speak-it-wrapper"><div class="speak-it">Speak It</div></button>
-                      </div>
-                    </div>
-                    <div class="key-space">
-                      <div class="group-4">
-                        <div class="overlap-group-3">
-                          <button onclick="addToPhrase(' ')" class="rectangle"></button>
-                          <!--ADD FUNCTIONALITY FOR SPACE KEY-->
-                          <div onclick="addToPhrase(' ')" class="text-wrapper-19">Space / New Word</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="key-new-phrase">
-                      <div class="group-5">
-                        <!--NOT SURE WHAT NEW PHRASE IS SUPPOSED TO DO, CLEAR THE STRING FUNCTIONALITY SHOULD BE ADDED HERE IG-->
-                        <button class="overlap-group-4"><div class="text-wrapper-20">New Phrase</div></button>
-                      </div>
-                    </div>
-                    <div class="key-go-back">
-                      <button class="img-wrapper"><img class="go-back-icon" src="img/go-back-icon-1.svg" /></button>
-                    </div>
-                  </div>
-                  <div class="phrase-text">
-                    <!--THIS IS WHERE THE TEXT BOX IS, CHANGE CSS TO MAKE THE TEXT LOOK BETTER IN THE TEXT BOX LATER-->
-                    <div class="phrase" id="phrase-text-box" contenteditable="true"></div>
-                  </div>
-                  <!--THIS IS WHERE PREDICTIVE TEXT FUNCTIONALITY WILL GO, THIS WILL NEED TO BE DONE IN JAVASCRIPT, *MAY BE VERY INVOLVED*-->
-                  <div class="predictive-text">
-                    <div class="prediction"></div>
-                    <div class="prediction-2"></div>
-                    <div class="prediction-3"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="button-main-menu">
-                <div class="group-6">
-                  <button class="overlap-group-5" onclick="openSubmenu(event, 'text-2-speech','main-menu')"><div class="text-wrapper-21">Main Menu</div></button>
-                </div>
-              </div>
-              <div class="button-large">
-                <div class="group-6">
-                  <button class="overlap-group-5"><div class="text-wrapper-21">Quick Phrases</div></button>
-                </div>
-              </div>
-              <div class="page-title"><div class="text-speech">Text-2-speech</div></div>
-            </div>
-            <div class="button-settings">
-              <div class="group-7">
-                <button class="overlap-group-6" onclick="openSubmenu(event,'text-2-speech','settings-page')"><div class="text">Settings</div></button>
-              </div>
-            </div>
-            <div class="button-outlet">
-              <div class="group-7">
-                <button class="overlap-group-6" onclick="openSubmenu(event,'text-2-speech','outlet-menu')"><div class="text">Outlet Controls</div></button>
-              </div>
-            </div>
-            <div class="button-music">
-              <div class="group-7">
-                <button class="overlap-group-6" onclick="openSubmenu(event,'text-2-speech','music-menu')"><div class="text">Music</div></button>
-              </div>
-            </div>
-            <div class="button-TV-controls">
-              <div class="group-7">
-                <button class="overlap-group-6" onclick="openSubmenu(event,'text-2-speech','tv-control-menu')"><div class="text">Tv Controls</div></button>
-              </div>
-            </div>
-            <div class="button-ask-something">
-              <div class="group-7">
-                <!--ADD FUNCTIONALITY TO TEXT-2-SPEECH BACKEND TO AUTOMATICALLY SAY OUT LOUD-->
-                <button onclick="speakCanIAsk()" class="overlap-group-6"><p class="text">I’d Like To Ask You Something</p></button>
-              </div>
-            </div>
-            <div onclick="speakItStarts()" class="button-starts-with">
-              <div class="group-7">
-                <button class="overlap-group-6"><div class="text">It Starts With ...</div></button>
-              </div>
-            </div>
-            <div onclick="speakNo()" class="button-no">
-              <div class="group-7">
-                <!--ADD FUNCTIONALITY TO TEXT-2-SPEECH BACKEND TO AUTOMATICALLY SAY NO OUT LOUD-->
-                <button class="overlap-group-6"><div class="text">No</div></button>
-              </div>
-            </div>
-            <div onclick="speakYes()" class="button-yes">
-              <div class="group-7">
-                <!--ADD FUNCTIONALITY TO TEXT-2-SPEECH BACKEND TO AUTOMATICALLY SAY YES OUT LOUD-->
-                <button class="overlap-group-6"><div class="text">Yes</div></button>
-              </div>
-            </div>
-          </div>
+    </div>
+  </div>
+
+  <!-- TV CONTROLS -->
+
+  <div class="desktop-TV-controls" id="tv-control-menu">
+    <div class="div">
+      <div class="button-main-menu">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'tv-control-menu','main-menu')">
+            <div class="text">Main Menu</div>
+          </button>
         </div>
       </div>
-
-      <!-- TV CONTROLS -->
-
-      <div class="desktop-TV-controls" id = "tv-control-menu">
-        <div class="div">
-          <div class="button-main-menu">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'tv-control-menu','main-menu')"><div class="text">Main Menu</div></button>
-            </div>
-          </div>
-          <div class="button-settings">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'tv-control-menu','settings-page')"><div class="text">Settings</div></button>
-            </div>
-          </div>
-          <div class="button-outlet">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'tv-control-menu','outlet-menu')"><div class="text">Outlet Controls</div></button>
-            </div>
-          </div>
-          <div class="button-music">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'tv-control-menu','music-menu')"><div class="text">Music</div></button>
-            </div>
-          </div>
-          <div class="button-text-speech">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'tv-control-menu','text-2-speech')"><div class="text">Text-2-speech</div></button>
-            </div>
-          </div>
-          <div class="button-mute-ON-OFF">
-            <div class="overlap-group-wrapper">
-              <!--ADD MUTE/UNMUTE FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS -->
-              <button class="div-wrapper"><div class="text-wrapper">Mute On/off</div></button>
-            </div>
-          </div>
-          <div class="button-volume-DOWN">
-            <div class="overlap-group-wrapper">
-              <!--ADD VOLUME DOWN FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
-              <button class="div-wrapper"><div class="text-wrapper">Volume Down</div></button>
-            </div>
-          </div>
-          <div class="button-volume-UP">
-            <div class="overlap-group-wrapper">
-              <!--ADD VOLUME UP FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
-              <button class="div-wrapper"><div class="text-wrapper">Volume Up</div></button>
-            </div>
-          </div>
-          <div class="button-channel-DOWN">
-            <div class="overlap-group-wrapper">
-              <!--ADD CHANNEL DOWN FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
-              <button class="div-wrapper"><div class="text-wrapper">Channel Down</div></button>
-            </div>
-          </div>
-          <div class="button-channel-UP">
-            <div class="overlap-group-wrapper">
-              <!--ADD CHANNEL UP FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
-              <button class="div-wrapper"><div class="text-wrapper">Channel Up</div></button>
-            </div>
-          </div>
-          <div class="button-power-ON-OFF">
-            <div class="overlap-group-wrapper">
-              <!--ADD POWER ON/OFF FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
-              <button class="div-wrapper"><div class="text-wrapper">Power On/off</div></button>
-            </div>
-          </div>
-          <div class="page-title"><div class="TV-controls">Tv Controls</div></div>
+      <div class="button-settings">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'tv-control-menu','settings-page')">
+            <div class="text">Settings</div>
+          </button>
         </div>
       </div>
-
-      <!-- MUSIC CONTROLS-->
-
-      <div class="desktop-music-menu" id="music-menu">
-        <div class="div">
-          <div class="button-main-menu">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'music-menu','main-menu')"><div class="text">Main Menu</div></button>
-            </div>
-          </div>
-          <div class="button-settings">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'music-menu','settings-page')"><div class="text">Settings</div></button>
-            </div>
-          </div>
-          <div class="button-outlet">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'music-menu','outlet-menu')"><div class="text">Outlet Controls</div></button>
-            </div>
-          </div>
-          <div class="button-TV-controls">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'music-menu','tv-control-menu')"><div class="text">Tv Controls</div></button>
-            </div>
-          </div>
-          <div class="button-text-speech">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'music-menu','text-2-speech')"><div class="text">Text-2-speech</div></button>
-            </div>
-          </div>
-          <div class="button-skip-song">
-            <div class="group">
-              <!--ADD SKIP SONG FUNCTIONALITY HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
-              <button class="overlap-group" onclick="nextSong()"><div class="text">Skip Song</div></button>
-            </div>
-          </div>
-          <div class="button-PAUSE-PLAY">
-            <div class="group">
-              <!--ADD PLAY/PAUSE SONG FUNCTIONALITY HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
-              <button class="overlap-group" onclick="pauseSong()"><div class="text">Pause/play</div></button>
-            </div>
-          </div>
-          <div class="button-previous-song">
-            <div class="group">
-              <!--ADD PREV SONG FUNCTIONALITY HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
-              <button class="overlap-group" onclick="previousSong()"><div class="text">Previous Song</div></button>
-            </div>
-          </div>
-          <div class="button-classical">
-            <div class="overlap-group-wrapper">
-              <!--ADD FUNCTIONALITY TO PLAY THE CLASSICAL MUSIC HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
-              <button class="quick-phrases-wrapper" onclick="playClassicalMusic()"><div class="quick-phrases">Classical</div></button>
-            </div>
-          </div>
-          <div class="button-christian">
-            <div class="overlap-group-wrapper">
-              <!--ADD FUNCTIONALITY TO PLAY THE CHRISTIAN MUSIC HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
-              <button class="quick-phrases-wrapper" onclick="playChristianMusic()"><div class="quick-phrases">Christian</div></button>
-            </div>
-          </div>
-          <!--ADD FUNCTIONALITY TO DISPLAY THE SONG INFO HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
-          <div class="display">
-            <div id="song-playing" class="song-playing"></div>
-            <div id="genre" class="genre"></div>
-          </div>
-          <div class="page-title"><div class="text-wrapper">Music</div></div>
+      <div class="button-outlet">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'tv-control-menu','outlet-menu')">
+            <div class="text">Outlet Controls</div>
+          </button>
         </div>
       </div>
+      <div class="button-music">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'tv-control-menu','music-menu')">
+            <div class="text">Music</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-text-speech">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'tv-control-menu','text-2-speech')">
+            <div class="text">Text-2-speech</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-mute-ON-OFF">
+        <div class="overlap-group-wrapper">
+          <!--ADD MUTE/UNMUTE FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS -->
+          <button class="div-wrapper">
+            <div class="text-wrapper">Mute On/off</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-volume-DOWN">
+        <div class="overlap-group-wrapper">
+          <!--ADD VOLUME DOWN FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
+          <button class="div-wrapper">
+            <div class="text-wrapper">Volume Down</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-volume-UP">
+        <div class="overlap-group-wrapper">
+          <!--ADD VOLUME UP FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
+          <button class="div-wrapper">
+            <div class="text-wrapper">Volume Up</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-channel-DOWN">
+        <div class="overlap-group-wrapper">
+          <!--ADD CHANNEL DOWN FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
+          <button class="div-wrapper">
+            <div class="text-wrapper">Channel Down</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-channel-UP">
+        <div class="overlap-group-wrapper">
+          <!--ADD CHANNEL UP FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
+          <button class="div-wrapper">
+            <div class="text-wrapper">Channel Up</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-power-ON-OFF">
+        <div class="overlap-group-wrapper">
+          <!--ADD POWER ON/OFF FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
+          <button class="div-wrapper">
+            <div class="text-wrapper">Power On/off</div>
+          </button>
+        </div>
+      </div>
+      <div class="page-title">
+        <div class="TV-controls">Tv Controls</div>
+      </div>
+    </div>
+  </div>
 
-      <!-- OUTLET CONTROLS-->
+  <!-- MUSIC CONTROLS-->
 
-      <div class="desktop-outlet" id="outlet-menu">
-        <div class="div">
-          <div class="button-main-menu">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'outlet-menu','main-menu')"><div class="text">Main Menu</div></button>
-            </div>
-          </div>
-          <div class="button-settings">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'outlet-menu','settings-page')"><div class="text">Settings</div></button>
-            </div>
-          </div>
-          <div class="button-TV-controls">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'outlet-menu','tv-control-menu')"><div class="text">Tv Controls</div></button>
-            </div>
-          </div>
-          <div class="button-music">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'outlet-menu','music-menu')"><div class="text">Music</div></button>
-            </div>
-          </div>
-          <div class="button-text-speech">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'outlet-menu','text-2-speech')"><div class="text">Text-2-speech</div></button>
-            </div>
-          </div>
-          <div class="button-plug-ON-OFF">
-            <div class="overlap-group-wrapper">
-              <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
-              <button class="quick-phrases-wrapper"><div class="quick-phrases">Plug 5 On/off</div></button>
-            </div>
-          </div>
+  <div class="desktop-music-menu" id="music-menu">
+    <div class="div">
+      <div class="button-main-menu">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'music-menu','main-menu')">
+            <div class="text">Main Menu</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-settings">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'music-menu','settings-page')">
+            <div class="text">Settings</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-outlet">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'music-menu','outlet-menu')">
+            <div class="text">Outlet Controls</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-TV-controls">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'music-menu','tv-control-menu')">
+            <div class="text">Tv Controls</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-text-speech">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'music-menu','text-2-speech')">
+            <div class="text">Text-2-speech</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-skip-song">
+        <div class="group">
+          <!--ADD SKIP SONG FUNCTIONALITY HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
+          <button class="overlap-group" onclick="nextSong()">
+            <div class="text">Skip Song</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-PAUSE-PLAY">
+        <div class="group">
+          <!--ADD PLAY/PAUSE SONG FUNCTIONALITY HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
+          <button class="overlap-group" onclick="pauseSong()">
+            <div class="text">Pause/play</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-previous-song">
+        <div class="group">
+          <!--ADD PREV SONG FUNCTIONALITY HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
+          <button class="overlap-group" onclick="previousSong()">
+            <div class="text">Previous Song</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-classical">
+        <div class="overlap-group-wrapper">
+          <!--ADD FUNCTIONALITY TO PLAY THE CLASSICAL MUSIC HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
+          <button class="quick-phrases-wrapper" onclick="playClassicalMusic()">
+            <div class="quick-phrases">Classical</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-christian">
+        <div class="overlap-group-wrapper">
+          <!--ADD FUNCTIONALITY TO PLAY THE CHRISTIAN MUSIC HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
+          <button class="quick-phrases-wrapper" onclick="playChristianMusic()">
+            <div class="quick-phrases">Christian</div>
+          </button>
+        </div>
+      </div>
+      <!--ADD FUNCTIONALITY TO DISPLAY THE SONG INFO HERE AND CALL SCRIPT.JS FUNCTION ONCLICK-->
+      <div class="display">
+        <div id="song-playing" class="song-playing"></div>
+        <div id="genre" class="genre"></div>
+      </div>
+      <div class="page-title">
+        <div class="text-wrapper">Music</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OUTLET CONTROLS-->
+
+  <div class="desktop-outlet" id="outlet-menu">
+    <div class="div">
+      <div class="button-main-menu">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'outlet-menu','main-menu')">
+            <div class="text">Main Menu</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-settings">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'outlet-menu','settings-page')">
+            <div class="text">Settings</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-TV-controls">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'outlet-menu','tv-control-menu')">
+            <div class="text">Tv Controls</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-music">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'outlet-menu','music-menu')">
+            <div class="text">Music</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-text-speech">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'outlet-menu','text-2-speech')">
+            <div class="text">Text-2-speech</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-plug-ON-OFF">
+        <div class="overlap-group-wrapper">
+          <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
+          <button class="quick-phrases-wrapper">
+            <div class="quick-phrases">Plug 5 On/off</div>
+          </button>
+        </div>
+      </div>
+      <div class="group-wrapper">
+        <div class="overlap-group-wrapper">
+          <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
+          <button class="quick-phrases-wrapper">
+            <div class="quick-phrases">Plug 4 On/off</div>
+          </button>
+        </div>
+      </div>
+      <div class="div-wrapper">
+        <div class="overlap-group-wrapper">
+          <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
+          <button class="quick-phrases-wrapper">
+            <div class="quick-phrases">Plug 3 On/off</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-plug-ON-OFF-2">
+        <div class="overlap-group-wrapper">
+          <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
+          <button class="quick-phrases-wrapper">
+            <div class="quick-phrases">Plug 2 On/off</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-plug-ON-OFF-3">
+        <div class="overlap-group-wrapper">
+          <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
+          <button class="quick-phrases-wrapper">
+            <div class="quick-phrases">Plug 1 On/off</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-all-plugs-ON">
+        <div class="overlap-group-wrapper">
+          <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
+          <button class="quick-phrases-wrapper">
+            <div class="quick-phrases">All Plugs On/off</div>
+          </button>
+        </div>
+      </div>
+      <div class="page-title">
+        <div class="text-wrapper">Outlet Controls</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS PAGE-->
+
+  <div class="desktop-settings" id="settings-page">
+    <div class="div">
+      <div class="button-go-back">
+        <div class="group">
+          <button class="overlap-group" onclick="openSubmenu(event,'settings-page','main-menu')">
+            <div class="quick-phrases">Go Back</div>
+          </button>
+        </div>
+      </div>
+      <div class="button-cycle-selection">
+        <div class="group">
+          <button class="overlap-group">
+            <div class="quick-phrases">Activate Selection</div>
+          </button>
+        </div>
+      </div>
+      <div class="keyboard-selection">
+        <div class="switch-key-THAEL">
           <div class="group-wrapper">
             <div class="overlap-group-wrapper">
-              <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
-              <button class="quick-phrases-wrapper"><div class="quick-phrases">Plug 4 On/off</div></button>
+              <div class="div-wrapper">
+                <div class="text-wrapper">Off</div>
+              </div>
             </div>
           </div>
-          <div class="div-wrapper">
-            <div class="overlap-group-wrapper">
-              <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
-              <button class="quick-phrases-wrapper"><div class="quick-phrases">Plug 3 On/off</div></button>
+          <!--ADD FUNCTIONALITY TO CHANGE KEYBOARD LAYOUT LATER-->
+          <div class="outer-text">Key: Thael</div>
+        </div>
+        <div class="div-2">
+          <div class="group-2">
+            <div class="group-3">
+              <div class="div-wrapper">
+                <div class="text-wrapper">On</div>
+              </div>
             </div>
           </div>
-          <div class="button-plug-ON-OFF-2">
-            <div class="overlap-group-wrapper">
-              <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
-              <button class="quick-phrases-wrapper"><div class="quick-phrases">Plug 2 On/off</div></button>
-            </div>
-          </div>
-          <div class="button-plug-ON-OFF-3">
-            <div class="overlap-group-wrapper">
-              <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
-              <button class="quick-phrases-wrapper"><div class="quick-phrases">Plug 1 On/off</div></button>
-            </div>
-          </div>
-          <div class="button-all-plugs-ON">
-            <div class="overlap-group-wrapper">
-              <!--CONNECT BUTTON TO PLUG FUNCTIONALITY-->
-              <button class="quick-phrases-wrapper"><div class="quick-phrases">All Plugs On/off</div></button>
-            </div>
-          </div>
-          <div class="page-title"><div class="text-wrapper">Outlet Controls</div></div>
+          <!--ADD FUNCTIONALITY TO CHANGE KEYBOARD LAYOUT LATER-->
+          <div class="outer-text">Key: Qwerty</div>
         </div>
       </div>
-
-      <!-- SETTINGS PAGE-->
-
-      <div class="desktop-settings" id="settings-page">
-        <div class="div">
-          <div class="button-go-back">
-            <div class="group">
-              <button class="overlap-group" onclick="openSubmenu(event,'settings-page','main-menu')"><div class="quick-phrases">Go Back</div></button>
+      <div class="speed-selection">
+        <div class="switch-speed-sec">
+          <div class="group-wrapper">
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper">
+                <div class="text-wrapper">Off</div>
+              </div>
             </div>
           </div>
-          <div class="keyboard-selection">
-            <div class="switch-key-THAEL">
-              <div class="group-wrapper">
-                <div class="overlap-group-wrapper">
-                  <div class="div-wrapper"><div class="text-wrapper">Off</div></div>
-                </div>
+          <div class="outer-text">Speed: 3.5 Sec</div>
+        </div>
+        <div class="switch-speed-sec-2">
+          <div class="group-wrapper">
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper">
+                <div class="text-wrapper">Off</div>
               </div>
-              <!--ADD FUNCTIONALITY TO CHANGE KEYBOARD LAYOUT LATER-->
-              <div class="outer-text">Key: Thael</div>
-            </div>
-            <div class="div-2">
-              <div class="group-2">
-                <div class="group-3">
-                  <div class="div-wrapper"><div class="text-wrapper">On</div></div>
-                </div>
-              </div>
-              <!--ADD FUNCTIONALITY TO CHANGE KEYBOARD LAYOUT LATER-->
-              <div class="outer-text">Key: Qwerty</div>
             </div>
           </div>
-          <div class="speed-selection">
-            <div class="switch-speed-sec">
-              <div class="group-wrapper">
-                <div class="overlap-group-wrapper">
-                  <div class="div-wrapper"><div class="text-wrapper">Off</div></div>
-                </div>
+          <div class="outer-text">Speed: 3 Sec</div>
+        </div>
+        <div class="switch-speed-sec-3">
+          <div class="group-wrapper">
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper">
+                <div class="text-wrapper">Off</div>
               </div>
-              <div class="outer-text">Speed: 3.5 Sec</div>
-            </div>
-            <div class="switch-speed-sec-2">
-              <div class="group-wrapper">
-                <div class="overlap-group-wrapper">
-                  <div class="div-wrapper"><div class="text-wrapper">Off</div></div>
-                </div>
-              </div>
-              <div class="outer-text">Speed: 3 Sec</div>
-            </div>
-            <div class="switch-speed-sec-3">
-              <div class="group-wrapper">
-                <div class="overlap-group-wrapper">
-                  <div class="div-wrapper"><div class="text-wrapper">Off</div></div>
-                </div>
-              </div>
-              <div class="outer-text">Speed: 2.5 Sec</div>
-            </div>
-            <div class="switch-speed-sec-4">
-              <div class="group-wrapper">
-                <div class="overlap-group-wrapper">
-                  <div class="div-wrapper"><div class="text-wrapper">Off</div></div>
-                </div>
-              </div>
-              <div class="outer-text">Speed: 2 Sec</div>
-            </div>
-            <div class="switch-speed-sec-5">
-              <div class="group-wrapper">
-                <div class="overlap-group-wrapper">
-                  <div class="div-wrapper"><div class="text-wrapper">Off</div></div>
-                </div>
-              </div>
-              <div class="outer-text">Speed: 3.5 Sec</div>
-            </div>
-            <div class="switch-speed-sec-6">
-              <div class="group-wrapper">
-                <div class="overlap-group-wrapper">
-                  <div class="div-wrapper"><div class="text-wrapper">Off</div></div>
-                </div>
-              </div>
-              <div class="outer-text">Speed: 3 Sec</div>
-            </div>
-            <div class="switch-speed-sec-7">
-              <div class="group-wrapper">
-                <div class="overlap-group-wrapper">
-                  <div class="div-wrapper"><div class="text-wrapper">Off</div></div>
-                </div>
-              </div>
-              <div class="outer-text">Speed: 2.5 Sec</div>
-            </div>
-            <div class="div-2">
-              <div class="group-2">
-                <div class="group-3">
-                  <div class="div-wrapper"><div class="text-wrapper">On</div></div>
-                </div>
-              </div>
-              <div class="outer-text">Speed: 2 Sec</div>
             </div>
           </div>
-          <div class="page-title"><div class="text-wrapper-2">Settings</div></div>
+          <div class="outer-text">Speed: 2.5 Sec</div>
+        </div>
+        <div class="switch-speed-sec-4">
+          <div class="group-wrapper">
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper">
+                <div class="text-wrapper">Off</div>
+              </div>
+            </div>
+          </div>
+          <div class="outer-text">Speed: 2 Sec</div>
+        </div>
+        <div class="switch-speed-sec-5">
+          <div class="group-wrapper">
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper">
+                <div class="text-wrapper">Off</div>
+              </div>
+            </div>
+          </div>
+          <div class="outer-text">Speed: 3.5 Sec</div>
+        </div>
+        <div class="switch-speed-sec-6">
+          <div class="group-wrapper">
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper">
+                <div class="text-wrapper">Off</div>
+              </div>
+            </div>
+          </div>
+          <div class="outer-text">Speed: 3 Sec</div>
+        </div>
+        <div class="switch-speed-sec-7">
+          <div class="group-wrapper">
+            <div class="overlap-group-wrapper">
+              <div class="div-wrapper">
+                <div class="text-wrapper">Off</div>
+              </div>
+            </div>
+          </div>
+          <div class="outer-text">Speed: 2.5 Sec</div>
+        </div>
+        <div class="div-2">
+          <div class="group-2">
+            <div class="group-3">
+              <div class="div-wrapper">
+                <div class="text-wrapper">On</div>
+              </div>
+            </div>
+          </div>
+          <div class="outer-text">Speed: 2 Sec</div>
         </div>
       </div>
-    <!-- Unused, decided that the only setting that should be changed is the speed of the selector -->
-    <!-- <div id="settings-menu" class="menu-wrapper">
-        <button class="menu-button" id="single-input"    
-            onpointerdown="toggleInputMode(event, 'on')" 
-            oncontextmenu="toggleInputMode(event, 'on'); return false;"
-            >
-                Grid Select On
-        </button>
-        <button class="menu-button" id="touch-mouse"     
-            onpointerdown="toggleInputMode(event, 'off')" 
-            oncontextmenu="toggleInputMode(event, 'off'); return false;"
-            >
-                Grid Select Off
-        </button>
-        <button class="menu-button" id="configure-speed" 
-            onpointerdown="changeMenu(event, 'configure-speed-menu')"
-            oncontextmenu="changeMenu(event, 'configure-speed-menu'); return false;"
-            >
-                Set Grid Select Speed
-        </button>
-        <button class="menu-button" id="settings-back"   
-            onpointerdown="changeMenu(event, 'main-menu')" 
-            oncontextmenu="changeMenu(event, 'main-menu'); return false;"
-            >
-                Back
-        </button>
-    </div> -->
-
-<!-- PLUG FUNCTIONALITY ADD BACK LATER
+      <div class="page-title">
+        <div class="text-wrapper-2">Settings</div>
+      </div>
+    </div>
+  </div>
+ 
+  <!-- PLUG FUNCTIONALITY ADD BACK LATER
 
     <div id="configure-speed-menu" class="menu-wrapper">
         <h2 id="speed-label"></h2>
@@ -834,8 +1018,8 @@
         </div>
     </div>
   -->
-    <script type="text/javascript" src="/eel.js"></script>
-    <script type="text/javascript" src="script.js"></script>
+  <script type="text/javascript" src="/eel.js"></script>
+  <script type="text/javascript" src="script.js"></script>
 </body>
 
 </html>

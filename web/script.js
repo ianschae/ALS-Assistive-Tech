@@ -3,69 +3,79 @@
             Constants
 -------------------------------------------
 */
+// Current focus area, represented by a string that matches one of the constants defined later
+let currentFocusArea = 'mainMenuButtons'; // Default to starting with main menu buttons
+let currentIndex = 0; // Index of the currently highlighted button/key
+let cycling = false; // Indicates if cycling through elements is currently active
 
-const plugSelectOrder = [
-    "plug-all",
-    "plug-1",
-    "plug-2",
-    "plug-3",
-    "plug-4",
-    "plug-5"
-    ,"main-menu-btn"
-]
 
-const plugSubmenuOrder = [
-    "plug-submenu-on",
-    "plug-submenu-off",
-    "plug-submenu-cancel"
-]
+// Mapping submenu IDs to their corresponding button ID arrays
+const submenuFocusMapping = {
+    "text-2-speech": keyboardFullOrder, // Assuming keyboardFullOrder is the focus for the text-2-speech submenu
+    "main-menu": mainMenuButtons, // The main menu buttons
+    "tv-control-menu": tvControlButtons,
+    "music-menu": musicControlButtons,
+    "settings-page": settingsButtons,
+    // Add other submenu mappings here
+};
 
-const mainMenuOrder = [
-    "plugs"
-    ,"keyboard"
-    ,"settings"
-]
+const mainMenuButtons = [
+    "button-text-speech",
+    "button-TV-controls",
+    "button-music",
+    "button-outlet",
+    "button-settings"
+];
 
-const settingsMenuOrder = [
-    "single-input"
-    ,"touch-mouse"
-    ,"configure-speed"
-    ,"settings-back"
-]
+const keyboardLayout = {
+    "keyboard-first-row": [
+        "key-q", "key-w", "key-e", "key-r", "key-t",
+        "key-y", "key-u", "key-i", "key-o", "key-p",
+        "auto-1" // Assuming this is the ID for the 'Auto' functionality in the first row
+    ],
+    "keyboard-second-row": [
+        "key-a", "key-s", "key-d", "key-f", "key-g",
+        "key-h", "key-j", "key-k", "key-l",
+        // Assuming there's an auto functionality for the second row as well
+    ],
+    "keyboard-third-row": [
+        "key-z", "key-x", "key-c", "key-v", "key-b",
+        "key-n", "key-m", "key-backspace",
+        "key-auto-2" // Assuming this is the ID for the 'Auto' functionality in the third row
+    ],
+    "keyboard-fourth-row": [
+        "key-1", "key-2", "key-3", "key-4", "key-5",
+        "key-6", "key-7", "key-8", "key-9", "key-0"
+    ],
+    "keyboard-fifth-row": [
+        "key-speak-it", "key-space", "key-new-phrase", "key-go-back"
+    ]
+};
 
-const speedMenuOrder = [
-    "speed-500"
-    ,"speed-1000"
-    ,"speed-1500"
-    ,"speed-2000"
-    ,"speed-back"
+// Combining all keys for general cycling
+const keyboardFullOrder = [
+    ...keyboardLayout["keyboard-first-row"],
+    ...keyboardLayout["keyboard-second-row"],
+    ...keyboardLayout["keyboard-third-row"],
+    ...keyboardLayout["keyboard-fourth-row"],
+    ...keyboardLayout["keyboard-fifth-row"]
+];
 
-]
+const textToSpeechMenuButtons = [
+    "button-main-menu", // ID for Main Menu button
+    "key-button-settings", // ID for Settings button
+    "key-button-outlet", // ID for Outlet Controls button
+    "key-button-music", // ID for Music button
+    "key-button-tv-controls", // ID for TV Controls button
+    "key-button-ask-something", // ID for 'I’d Like To Ask You Something' button
+    "key-button-starts-with", // ID for 'It Starts With...' button
+    "key-no", // ID for 'No' button
+    "key-yes", // ID for 'Yes' button
+    "key-quick-phrases" // ID for Quick Phrases button, if it's interactive
+];
 
-const keyboardMenuOrder = [
-    "keyboard-new-btn"
-    ,"keyboard-menu-btn"
-]
-
-let dynamicKeyboardOrder = [] // Used for single input mode
-
-let menuIdMapping = {
-    "plug-select" : plugSelectOrder,
-    "plug-submenu": plugSubmenuOrder
-    ,"main-menu": mainMenuOrder
-    ,"settings-menu": settingsMenuOrder
-    ,"keyboard-menu": keyboardMenuOrder
-    ,"dynamic-kb": dynamicKeyboardOrder
-    ,"configure-speed-menu": speedMenuOrder
-}
-
-let plugLabels = {
-    "1" : "Plug 1",
-    "2" : "PLug 2",
-    "3" : "Plug 3",
-    "4" : "Plug 4",
-    "5" : "Plug 5"
-}
+// Note: Ensure IDs like "button-main-menu", "key-button-settings", etc., 
+// match the actual IDs in your HTML for the corresponding buttons.
 
 /*
 ---------------------------------------
@@ -79,7 +89,6 @@ var previousElement
 var previousColor
 var cycleTimeout
 var cycleTime =  1000  //2000
-
 
 /*
 --------------------------------------------------
@@ -100,77 +109,35 @@ function init() {
         resetCycle('main-menu')
     }
 }
-/*
-function resetMouse(event){
-    if (event != undefined) event.stopPropagation()
-    eel.resetMouse()
-}
-*/
 
 /*
-const changeMenu = (e, newMenuID) => {
-    if (e != undefined) e.stopPropagation()
-    let currentMenu = document.getElementById(e.currentTarget.id)
-                              .parentElement
-    let newMenu = document.getElementById(newMenuID)
-
-    if (singleInputMode) resetCycle(newMenuID)
-
-    currentMenu.style.visibility = 'hidden'
-    newMenu.style.visibility = 'visible'
-}
+__________________________________________________________________________________________________________________
+                                        MENU CHANGE FUNCTIONS
+__________________________________________________________________________________________________________________
 */
-
-function closeSubmenu(event, supermenuId, submenuId) {
-    if (event != undefined) event.stopPropagation();
-    let supermenu = document.getElementById(supermenuId)
-    let submenu = document.getElementById(submenuId)
-    
-    if (singleInputMode) resetCycle(supermenuId)
-    
-    submenu.style.visibility = 'hidden'
-    supermenu.style.visibility = 'visible'
-}
-
 function openSubmenu(event, supermenuId, submenuId) {
-    if (event != undefined) event.stopPropagation();
+    if (event) event.stopPropagation();
     let supermenu = document.getElementById(supermenuId);
     let submenu = document.getElementById(submenuId);
 
     if (supermenu && submenu) {
-        supermenu.style.display = 'none'; // Hide the supermenu
-        submenu.style.display = 'block'; // Show the submenu
+        supermenu.style.display = 'none';
+        submenu.style.display = 'block';
+        changeMenu(submenuId); // Update the cycle to the new submenu
     }
 }
 
-
-/*
---------------------------------------------------
-        Single Input Mode Functions
---------------------------------------------------
-*/
-
-const toggleInputMode = (e, mode) => {
-    if (mode == 'on') {
-        singleInputMode = true
-        // document.body.onclick = accessibilityMouseClick // Changed to on mouse down for Jane
-        document.body.onpointerdown = accessibilityMouseClick
-    } else {
-        singleInputMode = false
-        if (cycleTimeout != null) previousElement.style.backgroundColor = previousColor
-        // document.body.onclick = null
-        document.body.pointerdown = null
-        clearTimeout(cycleTimeout)
-    }
-    changeMenu(e, 'main-menu')
+function changeMenu(submenuId) {
+    const newFocus = submenuFocusMapping[submenuId] || mainMenuButtons; // Fallback to mainMenuButtons
+    switchFocus(newFocus);
 }
 
-
-const resetCycle = (menuId) => {
-    selectedIndex = -1
-    selectedMenuOrder = menuIdMapping[menuId]
-    clearTimeout(cycleTimeout)
-    cycleSelection()
+// Updated switchFocus function to accept arrays directly
+function switchFocus(newFocusArray) {
+    currentFocus = newFocusArray;
+    currentIndex = 0; // Reset index for new focus area
+    cycling = false; // Ensure cycling is reset
+    highlightCurrentButton(); // Update the highlight based on new focus
 }
 
 
@@ -186,17 +153,61 @@ function accessibilityMouseClick(e) {
         document.body.onpointerdown = e => accessibilityMouseClick()
     }
 }
+/*
+___________________________________________________________________________________________
+                                CYCLE SELECTION CODE
+___________________________________________________________________________________________
+*/
+// Adapted highlightCurrentButton to use currentFocus array
+function highlightCurrentButton() {
+    // Clear existing highlights
+    document.querySelectorAll('.highlighted').forEach(elem => {
+        elem.classList.remove('highlighted');
+    });
+    
+    // Check if there's an element to highlight
+    if(currentIndex < currentFocus.length) {
+        const currentElementId = currentFocus[currentIndex];
+        const currentElement = document.getElementById(currentElementId);
+        if (currentElement) {
+            currentElement.classList.add('highlighted');
+        }
+    }
+}
 
-function cycleSelection() {
-    if (previousElement != null) previousElement.style.backgroundColor = previousColor;
-    selectedIndex = (selectedIndex + 1) % selectedMenuOrder.length
-    var hoveredElement = document.getElementById(selectedMenuOrder[selectedIndex])
-    previousElement = hoveredElement
-    previousColor = previousElement.style.backgroundColor;
-    hoveredElement.style.backgroundColor = "orange";
-    // Handle Hover Element Highlighting
-    // console.log(selectedMenuOrder[selectedIndex])
-    cycleTimeout = setTimeout(cycleSelection, cycleTime)
+// Adapt cycleButtons to work with the currentFocus array
+function cycleButtons() {
+    if (!cycling) return; // Stop cycling if flag is false
+    currentIndex = (currentIndex + 1) % currentFocus.length; // Use currentFocus length
+    highlightCurrentButton();
+    setTimeout(cycleButtons, 500); // Continue cycling every 500ms
+}
+
+// Initialize cycleButtons on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Potentially other initialization code
+    
+    // Example to start cycling - you might want to trigger this differently
+    document.addEventListener('mousedown', () => {
+        cycling = true;
+        cycleButtons();
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (cycling) {
+            cycling = false; // Stop cycling
+            selectButton(); // Trigger the action for the selected button
+        }
+    });
+});
+
+// Select the current button based on currentIndex and currentFocus
+function selectButton() {
+    if(currentFocus && currentIndex < currentFocus.length) {
+        const selectedElementId = currentFocus[currentIndex];
+        const selectedElement = document.getElementById(selectedElementId);
+        selectedElement.click();
+    }
 }
 /*
 --------------------------------------------------
@@ -267,6 +278,11 @@ function addToPhrase(char) {
 }
 eel.expose(addToPhrase);//expose to eel
 
+function clearPhrase(){
+    var textBox = document.getElementById("phrase-text-box");
+    textBox.innerText = '';
+}
+
 function speakYes() {
     eel.speak_yes();  // Call the Python function
 }
@@ -297,7 +313,7 @@ function setMusicDirectory(directory){
 }
 function playClassicalMusic() {
     setMusicDirectory('classical'); // Set music directory to classical
-    playSong('/Users/ianschaefer/ALS-Assistive-Tech/Music/Classical/[SPOTIFY-DOWNLOADER.COM] Ave Maria (after J.S. Bach).mp3', 'classical'); // Play the first song (replace with actual song name)
+    playSong('/Users/ianschaefer/ALS-Assistive-Tech/Music/Classical/Ave Maria (after J.S. Bach).mp3', 'classical'); // Play the first song (replace with actual song name)
 }
 
 function playChristianMusic() {
@@ -330,6 +346,34 @@ function updateSongInformation(songName, genre) {
     document.getElementById("genre").innerText = "Genre: " + genre;
 }
 eel.expose(updateSongInformation); // Expose the function to Eel
+/*
+--------------------------------------------------
+        Single Input Mode Functions
+--------------------------------------------------
+*/
+
+const toggleInputMode = (e, mode) => {
+    if (mode == 'on') {
+        singleInputMode = true
+        // document.body.onclick = accessibilityMouseClick // Changed to on mouse down for Jane
+        document.body.onpointerdown = accessibilityMouseClick
+    } else {
+        singleInputMode = false
+        if (cycleTimeout != null) previousElement.style.backgroundColor = previousColor
+        // document.body.onclick = null
+        document.body.pointerdown = null
+        clearTimeout(cycleTimeout)
+    }
+    changeMenu(e, 'main-menu')
+}
+
+
+const resetCycle = (menuId) => {
+    selectedIndex = -1
+    selectedMenuOrder = menuIdMapping[menuId]
+    clearTimeout(cycleTimeout)
+    cycleSelection()
+}
 
 /*
 --------------------------------------------------
