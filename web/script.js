@@ -20,11 +20,6 @@ const plugSubmenuOrder = [
     "plug-submenu-cancel"
 ]
 
-const mainMenuOrder = [
-    "plugs"
-    ,"keyboard"
-    ,"settings"
-]
 
 const settingsMenuOrder = [
     "single-input"
@@ -41,13 +36,6 @@ const speedMenuOrder = [
     ,"speed-back"
 
 ]
-
-const keyboardMenuOrder = [
-    "keyboard-new-btn"
-    ,"keyboard-menu-btn"
-]
-
-let dynamicKeyboardOrder = [] // Used for single input mode
 
 let menuIdMapping = {
     "plug-select" : plugSelectOrder,
@@ -66,7 +54,21 @@ let plugLabels = {
     "4" : "Plug 4",
     "5" : "Plug 5"
 }
+/*
+_____________________________________________________________________________________________________
+                                            MAIN MENU CONSTANTS
+_____________________________________________________________________________________________________
+*/
+const menuContainer = document.getElementById('main-menu');
+const menuItems = menuContainer.querySelectorAll('.button-text-speech, .button-TV-controls, .button-music, .button-outlet, .button-settings');
 
+/*
+_____________________________________________________________________________________________________
+                                            T2S/KEYBOARD CONSTANTS
+_____________________________________________________________________________________________________
+*/
+const t2sContainer = document.getElementById('text-2-speech');
+const t2sItems = t2sContainer.querySelectorAll('.button-yes, .button-no, .button-starts-with, .button-ask-something, .button-large, .keyboard, .button-TV-controls, .button-music, .button-outlet, .button-settings, .button-main-menu')
 /*
 ---------------------------------------
             Global Vars
@@ -107,30 +109,8 @@ function resetMouse(event){
 }
 */
 
-/*
-const changeMenu = (e, newMenuID) => {
-    if (e != undefined) e.stopPropagation()
-    let currentMenu = document.getElementById(e.currentTarget.id)
-                              .parentElement
-    let newMenu = document.getElementById(newMenuID)
-
-    if (singleInputMode) resetCycle(newMenuID)
-
-    currentMenu.style.visibility = 'hidden'
-    newMenu.style.visibility = 'visible'
-}
-*/
-
-function closeSubmenu(event, supermenuId, submenuId) {
-    if (event != undefined) event.stopPropagation();
-    let supermenu = document.getElementById(supermenuId)
-    let submenu = document.getElementById(submenuId)
-    
-    if (singleInputMode) resetCycle(supermenuId)
-    
-    submenu.style.visibility = 'hidden'
-    supermenu.style.visibility = 'visible'
-}
+let currentContainer;
+let currentItems;
 
 function openSubmenu(event, supermenuId, submenuId) {
     if (event != undefined) event.stopPropagation();
@@ -140,10 +120,17 @@ function openSubmenu(event, supermenuId, submenuId) {
     if (supermenu && submenu) {
         supermenu.style.display = 'none'; // Hide the supermenu
         submenu.style.display = 'block'; // Show the submenu
+
+        if(submenuId === 'main-menu'){
+            currentContainer = menuContainer;
+            currentItems = menuItems;
+        }
+        if(submenuId === 'text-2-speech'){
+            currentContainer = t2sContainer;
+            currentItems = t2sItems;
+        }
     }
 }
-
-
 /*
 --------------------------------------------------
         Single Input Mode Functions
@@ -188,47 +175,59 @@ function accessibilityMouseClick(e) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const menuContainer = document.getElementById('main-menu');
     let cycleTimeout;
     let currentIndex = 0;
-    const menuItems = menuContainer.querySelectorAll('.button-text-speech, .button-TV-controls, .button-music, .button-outlet, .button-settings');
     let cycling = false;
+
+    // Assume these are defined globally and updated by other parts of your script, such as openSubmenu
+    let currentContainer;
+    let currentItems;
 
     const highlightItem = (index) => {
         // First, remove highlight from all items
-        menuItems.forEach(item => {
-            const overlapGroup = item.querySelector('.overlap-group');
-            if (overlapGroup) {
-                overlapGroup.classList.remove('highlighted');
-            }
-        });
+        if (currentItems) {
+            currentItems.forEach(item => {
+                const overlapGroup = item.querySelector('.overlap-group');
+                if (overlapGroup) {
+                    overlapGroup.classList.remove('highlighted');
+                }
+            });
+        }
         // Then, add highlight to the current item
-        const currentOverlapGroup = menuItems[index].querySelector('.overlap-group');
-        if (currentOverlapGroup) {
-            currentOverlapGroup.classList.add('highlighted');
+        if (currentItems && currentItems[index]) {
+            const currentOverlapGroup = currentItems[index].querySelector('.overlap-group');
+            if (currentOverlapGroup) {
+                currentOverlapGroup.classList.add('highlighted');
+            }
         }
     };
 
     const cycleItems = () => {
-        if (!cycling) return;
+        if (!cycling || !currentItems) return;
         highlightItem(currentIndex);
-        currentIndex = (currentIndex + 1) % menuItems.length; // Move increment here
-        cycleTimeout = setTimeout(cycleItems, 1000); // Adjust time as needed
+        currentIndex = (currentIndex + 1) % currentItems.length; // Adjust to current items length
+        cycleTimeout = setTimeout(cycleItems, 1000);
     };
 
-    menuContainer.addEventListener('pointerdown', function() {
-        cycling = true;
-        cycleItems();
+    // Replace menuContainer with dynamic container listener setup
+    document.addEventListener('pointerdown', function(event) {
+        if (currentContainer && currentContainer.contains(event.target)) {
+            cycling = true;
+            cycleItems();
+        }
     });
 
     document.addEventListener('pointerup', function() {
         if (!cycling) return;
         clearTimeout(cycleTimeout);
         cycling = false;
-        const selectedItemIndex = (currentIndex === 0 ? menuItems.length : currentIndex) - 1; // Adjust for the increment in cycleItems
-        menuItems[selectedItemIndex].click(); // Click the highlighted item
+        if (currentItems) {
+            const selectedItemIndex = (currentIndex === 0 ? currentItems.length : currentIndex) - 1;
+            currentItems[selectedItemIndex]?.click(); // Safely attempt to click the highlighted item
+        }
     });
 });
+
 
 /*
 --------------------------------------------------
@@ -249,41 +248,6 @@ function togglePlug(e, state) {
     closeSubmenu(e, 'plug-select', 'plug-submenu')
 }
 
-/*
---------------------------------------------------
-            Keyboard Functions
---------------------------------------------------
-*/
-
-
-// janesKeyboardSelection is custom to a request by Jane and her caretakers. This goes through all
-// keys one at a time to select the button needed.
-
-
-// The following two functions (setKeyboardRowCycle and setKeyboardButtonCycle) allow the device
-// to select first the keyboard row and second the keyboard button. It is a faster way of going
-// through the keyboard.
-const setKeyboardRowCycle = () => {
-    if (singleInputMode) {
-        let newArr = document.getElementsByClassName('keyboard-row')
-        dynamicKeyboardOrder = []
-        for (let ele of newArr) {
-            dynamicKeyboardOrder.push(ele.id)
-            ele.onclick = (e) => setKeyboardButtonCycle(ele)
-        }
-        menuIdMapping["dynamic-kb"] = dynamicKeyboardOrder
-        resetCycle("dynamic-kb")
-    }
-}
-
-const setKeyboardButtonCycle = (ele) => {
-    dynamicKeyboardOrder = []
-    for (let child of ele.children) {
-        dynamicKeyboardOrder.push(child.id)
-    }
-    menuIdMapping["dynamic-kb"] = dynamicKeyboardOrder
-    resetCycle("dynamic-kb")
-}
 /*
 _________________________________________________________________________________________________
                                 TEXT-2-SPEECH FUNCTIONS
