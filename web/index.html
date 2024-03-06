@@ -67,7 +67,7 @@
     </div>
   </div>
 
-  <!--TEXT-2-SPEECH MENU-->
+  <!----------------------------------------TEXT-2-SPEECH MENU----------------------------------->
   <div class="desktop-text" id="text-2-speech">
     <div class="overlap-wrapper">
       <div class="overlap">
@@ -487,7 +487,7 @@
       </div>
     </div>
   </div>
-  <!-- TV CONTROLS -->
+  <!--------------------------------- TV CONTROLS ------------------------------------>
   <div class="desktop-TV-controls" id="tv-control-menu">
     <div class="div">
       <div class="button-main-menu" onclick="openSubmenu(event,'tv-control-menu','main-menu')">
@@ -525,7 +525,7 @@
           </button>
         </div>
       </div>
-      <div class="button-mute-ON-OFF">
+      <div class="button-mute-ON-OFF" onclick="sendTVCommand(event,'MUTE')">
         <div class="overlap-group-wrapper">
           <!--ADD MUTE/UNMUTE FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS -->
           <button class="div-wrapper">
@@ -533,7 +533,7 @@
           </button>
         </div>
       </div>
-      <div class="button-volume-DOWN">
+      <div class="button-volume-DOWN" onclick="sendTVCommand(event,'VOLUME_DOWN')">
         <div class="overlap-group-wrapper">
           <!--ADD VOLUME DOWN FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
           <button class="div-wrapper">
@@ -541,7 +541,7 @@
           </button>
         </div>
       </div>
-      <div class="button-volume-UP">
+      <div class="button-volume-UP" onclick="sendTVCommand(event,'VOLUME_UP')">
         <div class="overlap-group-wrapper">
           <!--ADD VOLUME UP FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
           <button class="div-wrapper">
@@ -549,7 +549,7 @@
           </button>
         </div>
       </div>
-      <div class="button-channel-DOWN">
+      <div class="button-channel-DOWN" onclick="sendTVCommand(event,'CHANNEL_DOWN')">
         <div class="overlap-group-wrapper">
           <!--ADD CHANNEL DOWN FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
           <button class="div-wrapper">
@@ -557,7 +557,7 @@
           </button>
         </div>
       </div>
-      <div class="button-channel-UP">
+      <div class="button-channel-UP" onclick="sendTVCommand(event,'CHANNEL_UP')">
         <div class="overlap-group-wrapper">
           <!--ADD CHANNEL UP FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
           <button class="div-wrapper">
@@ -565,7 +565,7 @@
           </button>
         </div>
       </div>
-      <div class="button-power-ON-OFF">
+      <div class="button-power-ON-OFF" onclick="sendTVCommand(event,'POWER')">
         <div class="overlap-group-wrapper">
           <!--ADD POWER ON/OFF FUNCTIONALITY HERE AND CONNECT TO SCRIPT.JS FUNCTION-->
           <button class="div-wrapper">
@@ -579,7 +579,7 @@
     </div>
   </div>
 
-  <!-- MUSIC CONTROLS-->
+  <!------------------------------------ MUSIC CONTROLS------------------------------------------>
 
   <div class="desktop-music-menu" id="music-menu">
     <div class="div">
@@ -669,7 +669,7 @@
     </div>
   </div>
 
-  <!-- OUTLET CONTROLS-->
+  <!--------------------------------------------- OUTLET CONTROLS------------------------------------------->
 
   <div class="desktop-outlet" id="outlet-menu">
     <div class="div">
@@ -762,9 +762,9 @@
     </div>
   </div>
 
-  <!-- SETTINGS PAGE-->
+  <!------------------------------------------ SETTINGS PAGE--------------------------------------->
 
-  <div class="desktop-settings" id="settings-page">
+  <div class="desktop-settings" id="settings-menu">
     <div class="div">
       <div class="button-go-back">
         <div class="group">

@@ -5,13 +5,13 @@ import pyautogui
 import threading
 import vlc
 import os
-
+import serial_com
 
 from gtts import gTTS
 import tempfile
 import sys 
 
-
+from serial_com import send_command, TVCommand  # Import the send_command function and TVCommand enum from serial_com.py
 ############################################    GUI SETUP   #######################################################
 
 #controller = rfcontroller.RFController() # Comment this out when developing on desktop
@@ -91,7 +91,41 @@ def speak_text(text):
         os.system(f"open {fp.name}.mp3") # For Windows use "start" instead of "open"
         # For Linux we use os.system(f"mpg321 {fp.name}.mp3")
 
+###################################### TV CONTROL FUNCTIONS ########################################################
+# Function to send power on command
+@eel.expose 
+def powerOnOff():
+    serial_com.send_command(serial_com.TVCommand.TURN_ON_OFF.value)
 
+# Function to send mute command
+@eel.expose 
+def muteUnmute():
+    serial_com.send_command(serial_com.TVCommand.MUTE_UNMUTE.value)
+
+# Function to send volume up command
+@eel.expose 
+def volumeUp():
+    serial_com.send_command(serial_com.TVCommand.VOLUME_UP.value)
+
+# Function to send volume down command
+@eel.expose 
+def volumeDown():
+    serial_com.send_command(serial_com.TVCommand.VOLUME_DOWN.value)
+
+# Function to send channel up command
+@eel.expose 
+def channelUp():
+    serial_com.send_command(serial_com.TVCommand.CHANNEL_UP.value)
+
+# Function to send channel down command
+@eel.expose 
+def channelDown():
+    serial_com.send_command(serial_com.TVCommand.CHANNEL_DOWN.value)
+
+# At the end of your main script or when the Eel server shuts down
+def cleanup():
+    serial_com.ser.close()
+    print("Serial port closed")
 ######################################  MUSIC PLAYER FUNCTIONS ###################################################
 
 classical_music_dir = '/Users/ianschaefer/ALS-Assistive-Tech/Music/Classical'
@@ -107,7 +141,7 @@ player = vlc.MediaPlayer()
 @eel.expose
 def on_song_end(event):
     next_song()  # Automatically play the next song
-        
+
 # to play next song when song ends
 event_manager = player.event_manager()
 event_manager.event_attach(vlc.EventType.MediaPlayerEndReached, on_song_end)
@@ -156,8 +190,18 @@ def previous_song():
 ######################################  TV CONTROL FUNCTIONS    #######################################
 
 if __name__ == "__main__":
-    eel.init('web', allowed_extensions=[".js",".html"])
-    #eel.init('/home/pi/ALS-Assistive-Tech/web', allowed_extensions=[".js",".html"])
-    #resetMouse()
-    eel.start('index.html', cmdline_args=['--start-fullscreen'])
-    
+    try:
+        eel.init('web', allowed_extensions=[".js",".html"])
+        #eel.init('/home/pi/ALS-Assistive-Tech/web', allowed_extensions=[".js",".html"])
+        #resetMouse()
+        eel.start('index.html', cmdline_args=['--start-fullscreen'])
+    finally:
+        cleanup() 
+
+# Call send_commands() after server starts
+serial_com.send_commands()
+
+# At the end of your main script or when the Eel server shuts down
+def cleanup():
+    serial_com.ser.close()
+    print("Serial port closed")

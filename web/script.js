@@ -20,33 +20,6 @@ const plugSubmenuOrder = [
     "plug-submenu-cancel"
 ]
 
-const mainMenuOrder = [
-    "plugs"
-    , "keyboard"
-    , "settings"
-]
-
-const settingsMenuOrder = [
-    "single-input"
-    , "touch-mouse"
-    , "configure-speed"
-    , "settings-back"
-]
-
-const speedMenuOrder = [
-    "speed-500"
-    , "speed-1000"
-    , "speed-1500"
-    , "speed-2000"
-    , "speed-back"
-
-]
-
-const keyboardMenuOrder = [
-    "keyboard-new-btn"
-    , "keyboard-menu-btn"
-]
-
 let dynamicKeyboardOrder = [] // Used for single input mode
 
 let menuIdMapping = {
@@ -66,7 +39,15 @@ let plugLabels = {
     "4": "Plug 4",
     "5": "Plug 5"
 }
-
+const tvRemoteSelectOrder = [
+    "tv-power",
+    "tv-mute",
+    "tv-channel-up",
+    "tv-channel-down",
+    "tv-volume-up",
+    "tv-volume-down",
+    "main-menu-btn"
+];
 /*
 _____________________________________________________________________________________________________
                                             MAIN MENU CONSTANTS
@@ -99,7 +80,7 @@ ________________________________________________________________________________
 ___________________________________________________________________________________________________
 */
 const musicContainer = document.getElementById('music-menu');
-const musicItems = musicContainer.querySelectorAll('.button-main-menu,.button-settings,.button-outlet,.button-TV-controls,.button-text-speech,.button-skip-song,.button-PAUSE-PLAY,.button-previous-song,.button-classical,.button-christian');
+const musicItems = musicContainer.querySelectorAll('.button-christian,.button-classical,.button-previous-song,.button-PAUSE-PLAY,.button-skip-song,.button-main-menu,.button-settings,.button-outlet,.button-TV-controls,.button-text-speech');
 /*
 /*
 ____________________________________________________________________________________________________________________
@@ -310,9 +291,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 /*
---------------------------------------------------
+________________________________________________________________________________________
             RF CONTROLLER CODE
---------------------------------------------------
+________________________________________________________________________________________
 */
 
 function togglePlug(e, state) {
@@ -411,6 +392,74 @@ function speakPhrase() {
     textBox.innerText = '';
 }
 eel.expose(speakPhrase);
+
+/*
+________________________________________________________________________________
+                                    TV Control Functions
+________________________________________________________________________________
+*/
+/*
+--------------------------------------------------
+*/
+/* Does nothing but when removed, user TV Remote 
+buttons click doesn't register to the Arduino */
+function powerOn() { 
+    //eel.powerOn() 
+   }
+const button = document.getElementById("init-remtoe-btn");
+button.addEventListener("click", powerOn);
+/*
+--------------------------------------------------
+*/
+
+// Function to send power on/off command
+function powerOnOff() {
+    eel.powerOnOff();
+}
+// Attach powerOnOff function to button
+const powerButton = document.getElementById("tv-power");
+powerButton.addEventListener("click", powerOnOff);
+
+// Function to send mute command
+function muteUnmute() {
+    eel.muteUnmute();
+}
+// Attach muteUnmute function to button
+const muteButton = document.getElementById("tv-mute");
+muteButton.addEventListener("click", muteUnmute);
+
+// Function to send volume up command
+function volumeUp() {
+    eel.volumeUp();
+}
+// Attach volumeUp function to button
+const volumeUpButton = document.getElementById("tv-volume-up");
+volumeUpButton.addEventListener("click", volumeUp);
+
+// Function to send volume down command
+function volumeDown() {
+    eel.volumeDown();
+}
+// Attach volumeDown function to button
+const volumeDownButton = document.getElementById("tv-volume-down");
+volumeDownButton.addEventListener("click", volumeDown);
+
+// Function to send channel up command
+function channelUp() {
+    eel.channelUp();
+}
+// Attach channelUp function to button
+const channelUpButton = document.getElementById("tv-channel-up");
+channelUpButton.addEventListener("click", channelUp);
+
+// Function to send channel down command
+function channelDown() {
+    eel.channelDown();
+}
+// Attach channelDown function to button
+const channelDownButton = document.getElementById("tv-channel-down");
+channelDownButton.addEventListener("click", channelDown);
+
 /*
 _________________________________________________________________________________________________
                                 MUSIC PLAYER CONTROL FUNCTIONS
