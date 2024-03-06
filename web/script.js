@@ -128,31 +128,6 @@ function resetMouse(event){
 }
 */
 
-/*
-const changeMenu = (e, newMenuID) => {
-    if (e != undefined) e.stopPropagation()
-    let currentMenu = document.getElementById(e.currentTarget.id)
-                              .parentElement
-    let newMenu = document.getElementById(newMenuID)
-
-    if (singleInputMode) resetCycle(newMenuID)
-
-    currentMenu.style.visibility = 'hidden'
-    newMenu.style.visibility = 'visible'
-}
-*/
-
-function closeSubmenu(event, supermenuId, submenuId) {
-    if (event != undefined) event.stopPropagation();
-    let supermenu = document.getElementById(supermenuId)
-    let submenu = document.getElementById(submenuId)
-
-    if (singleInputMode) resetCycle(supermenuId)
-
-    submenu.style.visibility = 'hidden'
-    supermenu.style.visibility = 'visible'
-}
-
 //default to main menu container and items
 let currentContainer = menuContainer;
 let currentItems = menuItems;
@@ -274,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
         cycleTimeout = setTimeout(cycleItems, 1000);
     };
 
-    // Use a more generic event listener that checks if the currentContainer contains the event target
+    //more generic event listener that checks if the currentContainer contains the event target
     document.addEventListener('pointerdown', function (event) {
         if (currentContainer.contains(event.target)) {
             cycling = true;
@@ -475,7 +450,7 @@ function playClassicalMusic() {
 
 function playChristianMusic() {
     setMusicDirectory('christian'); // Set music directory to christian
-    playSong('/Users/ianschaefer/ALS-Assistive-Tech/Music/Sample Christian 2/Amazing Grace.mp3', 'christian'); // Play the first song (replace with actual song name)
+    playSong('/Users/ianschaefer/ALS-Assistive-Tech/Music/Christian/Amazing Grace.mp3', 'christian'); // Play the first song (replace with actual song name)
 }
 
 function playSong(filePath, genre) {
@@ -505,9 +480,9 @@ function updateSongInformation(songName, genre) {
 eel.expose(updateSongInformation); // Expose the function to Eel
 
 /*
---------------------------------------------------
-                Config
---------------------------------------------------
+______________________________________________________________________________________
+                                    Config
+______________________________________________________________________________________
 */
 
 function storeConfig(setting, value) {
