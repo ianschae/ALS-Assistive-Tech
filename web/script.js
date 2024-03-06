@@ -122,9 +122,9 @@ var cycleTimeout
 var cycleTime = 1000  //2000
 
 /*
---------------------------------------------------
+___________________________________________________________________________________________________________________
                 INITIALIZATION
---------------------------------------------------
+___________________________________________________________________________________________________________________
 */
 function init() {
     // setTime();
@@ -201,7 +201,7 @@ function openSubmenu(event, supermenuId, submenuId) {
             currentContainer = musicContainer;
             currentItems = musicItems;
         }
-        if(submenuId === 'outlet-menu'){
+        if (submenuId === 'outlet-menu') {
             currentContainer = outletContainer;
             currentItems = outletItems;
         }
@@ -262,8 +262,18 @@ document.addEventListener('DOMContentLoaded', function () {
         keyboardButton.addEventListener('click', function () {
             currentContainer = keyboardContainer;
             currentItems = keyboardItems;
+            highlightItem;
         });
     }
+    const autoButtons = document.querySelectorAll('.auto, .auto-2, .auto-3');
+
+    autoButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            currentContainer = t2sContainer; // Make sure t2sContainer is correctly defined elsewhere
+            currentItems = t2sItems; // Ensure t2sItems is also defined and accessible here
+            highlightItem;
+        });
+    });
     const highlightItem = (index) => {
         // First, remove the yellow glow from all current items
         currentItems.forEach(item => {
@@ -411,12 +421,12 @@ function setMusicDirectory(directory) {
 }
 function playClassicalMusic() {
     setMusicDirectory('classical'); // Set music directory to classical
-    playSong('/Users/ianschaefer/ALS-Assistive-Tech/Music/Classical/[SPOTIFY-DOWNLOADER.COM] Ave Maria (after J.S. Bach).mp3', 'classical'); // Play the first song (replace with actual song name)
+    playSong('/Users/ianschaefer/ALS-Assistive-Tech/Music/Classical/Ave Maria (after J.S. Bach).mp3', 'classical'); // Play the first song (replace with actual song name)
 }
 
 function playChristianMusic() {
     setMusicDirectory('christian'); // Set music directory to christian
-    playSong('/Users/ianschaefer/ALS-Assistive-Tech/Music/Sample Christian 2/[SPOTIFY-DOWNLOADER.COM] Amazing Grace.mp3', 'christian'); // Play the first song (replace with actual song name)
+    playSong('/Users/ianschaefer/ALS-Assistive-Tech/Music/Sample Christian 2/Amazing Grace.mp3', 'christian'); // Play the first song (replace with actual song name)
 }
 
 function playSong(filePath, genre) {

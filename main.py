@@ -57,26 +57,26 @@ def appendCharacter(char):
 @eel.expose
 def speak_yes():
     tts = gTTS(text="Yes", lang='en')
-    tts.save("yes.mp3")  # Save the speech to an MP3 file
-    os.system("open yes.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
+    tts.save("t2spresetsounds/yes.mp3")  # Save the speech to an MP3 file
+    os.system("open t2spresetsounds/yes.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
 
 @eel.expose
 def speak_no():
     tts = gTTS(text="No", lang='en')
-    tts.save("no.mp3")  # Save the speech to an MP3 file
-    os.system("open no.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
+    tts.save("t2spresetsounds/no.mp3")  # Save the speech to an MP3 file
+    os.system("open t2spresetsounds/no.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
 
 @eel.expose
 def speak_it_starts():
     tts = gTTS(text="It starts with", lang='en')
-    tts.save("startswith.mp3")  # Save the speech to an MP3 file
-    os.system("open startswith.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
+    tts.save("t2spresetsounds/startswith.mp3")  # Save the speech to an MP3 file
+    os.system("open t2spresetsounds/startswith.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
 
 @eel.expose
 def speak_can_i_ask():
     tts = gTTS(text="I'd like to ask you something", lang='en')
-    tts.save("caniask.mp3")  # Save the speech to an MP3 file
-    os.system("open caniask.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
+    tts.save("t2spresetsounds/caniask.mp3")  # Save the speech to an MP3 file
+    os.system("open t2spresetsounds/caniask.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
 
 @eel.expose
 def speak_text(text):
@@ -89,18 +89,28 @@ def speak_text(text):
         tts.save(fp.name + '.mp3')
         # Play the speech
         os.system(f"open {fp.name}.mp3") # For Windows use "start" instead of "open"
-        # For Linux you might use os.system(f"mpg321 {fp.name}.mp3")
+        # For Linux we use os.system(f"mpg321 {fp.name}.mp3")
 
 
 ######################################  MUSIC PLAYER FUNCTIONS ###################################################
 
 classical_music_dir = '/Users/ianschaefer/ALS-Assistive-Tech/Music/Classical'
-christian_music_dir = '/Users/ianschaefer/ALS-Assistive-Tech/Music/Sample Christian 2'
+christian_music_dir = '/Users/ianschaefer/ALS-Assistive-Tech/Music/Christian'
 current_song_index = 0
 current_genre = ""  # Define the current genre variable
+current_music_dir = ""
+current_songs = []
 
 # Initialize VLC
 player = vlc.MediaPlayer()
+
+@eel.expose
+def on_song_end(event):
+    next_song()  # Automatically play the next song
+        
+# to play next song when song ends
+event_manager = player.event_manager()
+event_manager.event_attach(vlc.EventType.MediaPlayerEndReached, on_song_end)
 
 @eel.expose
 def set_music_directory(directory):
@@ -143,12 +153,11 @@ def previous_song():
     file_path = os.path.join(current_music_dir, current_songs[current_song_index])
     play_song(current_songs[current_song_index], current_genre)  # Pass current_genre to play_song()
 
-
 ######################################  TV CONTROL FUNCTIONS    #######################################
 
 if __name__ == "__main__":
     eel.init('web', allowed_extensions=[".js",".html"])
     #eel.init('/home/pi/ALS-Assistive-Tech/web', allowed_extensions=[".js",".html"])
     #resetMouse()
-    eel.start('new_index.html', cmdline_args=['--start-fullscreen'])
+    eel.start('index.html', cmdline_args=['--start-fullscreen'])
     
