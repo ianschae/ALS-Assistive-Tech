@@ -1,5 +1,5 @@
 import eel
-#import rfcontroller # This import should be commented out when testing on a PC
+import rfcontroller # This import should be commented out when testing on a PC
 import json
 import pyautogui
 import threading
@@ -14,32 +14,32 @@ import sys
 
 ############################################    GUI SETUP   #######################################################
 
-#controller = rfcontroller.RFController() # Comment this out when developing on desktop
+controller = rfcontroller.RFController() # Comment this out when developing on desktop
 screenWidth, screenHeight = pyautogui.size()
 pyautogui.FAILSAFE = False
 
 @eel.expose
 def togglePlug(command):
-    print(command) # For testing on a PC, this line should be uncommented, and the following line should be commented out
-    #controller.sendcode(command) # This line should be commented out when testing on PC, the library is not available on PC
+    #print(command) # For testing on a PC, this line should be uncommented, and the following line should be commented out
+    controller.sendcode(command) # This line should be commented out when testing on PC, the library is not available on PC
 
 # Below, some lines are commented out because to autostart on the pi we had to include full file paths. When working on the
 # software from a PC, uncomment the shortened paths and comment out the absolute paths that include the /home/pi/...
 @eel.expose
 def storeConfig(setting, value):
     config = {}
-    with open('config.json', 'r') as openfile:
-    #with open('/home/pi/ALS-Assistive-Tech/config.json', 'r') as openfile:
+    #with open('config.json', 'r') as openfile:
+    with open('/home/pi/Desktop/ALS-Assistive-Tech/ALS-Assistive-Tech/config.json', 'r') as openfile:
         config  = json.load(openfile)
-    with open('config.json', 'w') as writefile:
-    #with open('/home/pi/ALS-Assistive-Techp/config.json', 'w') as writefile:
+    #with open('config.json', 'w') as writefile:
+    with open('/home/pi/Desktop/ALS-Assistive-Tech/ALS-Assistive-Tech/config.json', 'w') as writefile:
         config[setting] = value
         json.dump(config, writefile)
 
 @eel.expose
 def loadConfig():
-    with open('config.json', 'r') as openfile:
-    #with open('/home/pi/ALS-Assistive-Tech/config.json', 'r') as openfile:
+    #with open('config.json', 'r') as openfile:
+    with open('/home/pi/Desktop/ALS-Assistive-Tech/ALS-Assistive-Tech/config.json', 'r') as openfile:
         config = json.load(openfile)
         eel.loadConfig(config)
 
@@ -58,25 +58,25 @@ def appendCharacter(char):
 def speak_yes():
     tts = gTTS(text="Yes", lang='en')
     tts.save("yes.mp3")  # Save the speech to an MP3 file
-    os.system("open yes.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
+    os.system("aplay yes.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS, 'aplay' for linux)
 
 @eel.expose
 def speak_no():
     tts = gTTS(text="No", lang='en')
     tts.save("no.mp3")  # Save the speech to an MP3 file
-    os.system("open no.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
+    os.system("aplay no.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS, 'aplay' for linux)
 
 @eel.expose
 def speak_it_starts():
     tts = gTTS(text="It starts with", lang='en')
     tts.save("startswith.mp3")  # Save the speech to an MP3 file
-    os.system("open startswith.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
+    os.system("aplay startswith.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS, 'aplay' for linux)
 
 @eel.expose
 def speak_can_i_ask():
     tts = gTTS(text="I'd like to ask you something", lang='en')
     tts.save("caniask.mp3")  # Save the speech to an MP3 file
-    os.system("open caniask.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS)
+    os.system("aplay caniask.mp3")  # Play the MP3 file (use 'open' instead of 'start' on macOS, 'aplay' for linux)
 
 @eel.expose
 def speak_text(text):
@@ -88,14 +88,14 @@ def speak_text(text):
     with tempfile.NamedTemporaryFile(delete=True) as fp:
         tts.save(fp.name + '.mp3')
         # Play the speech
-        os.system(f"open {fp.name}.mp3") # For Windows use "start" instead of "open"
-        # For Linux you might use os.system(f"mpg321 {fp.name}.mp3")
+        os.system(f"aplay {fp.name}.mp3") # For Windows use "start" instead of "open"
+        # For Linux you might use os.system(f"aplay {fp.name}.mp3")
 
 
 ######################################  MUSIC PLAYER FUNCTIONS ###################################################
 
-classical_music_dir = '/Users/ianschaefer/ALS-Assistive-Tech/Music/Classical'
-christian_music_dir = '/Users/ianschaefer/ALS-Assistive-Tech/Music/Sample Christian 2'
+classical_music_dir = 'Music/Classical'
+christian_music_dir = 'Music/Christian'
 current_song_index = 0
 current_genre = ""  # Define the current genre variable
 
@@ -147,8 +147,8 @@ def previous_song():
 ######################################  TV CONTROL FUNCTIONS    #######################################
 
 if __name__ == "__main__":
-    eel.init('web', allowed_extensions=[".js",".html"])
-    #eel.init('/home/pi/ALS-Assistive-Tech/web', allowed_extensions=[".js",".html"])
+    #eel.init('web', allowed_extensions=[".js",".html"])
+    eel.init('/home/pi/Desktop/ALS-Assistive-Tech/ALS-Assistive-Tech/web', allowed_extensions=[".js",".html",".css"])
     #resetMouse()
     eel.start('new_index.html', cmdline_args=['--start-fullscreen'])
     
