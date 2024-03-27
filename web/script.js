@@ -364,6 +364,16 @@ function addToPhrase(char) {
         textBox.innerHTML += '&nbsp;'; // Add a non-breaking space for visible effect
     } else {
         textBox.innerText += char;
+        const predict = predictiveText(textBox.innerText); // list of preditive words
+        const prediction1 = document.getElementById("prediction");
+        const prediction2 = document.getElementById("prediction-2");
+        const prediction3 = document.getElementById("prediction-3");
+        console.log(predict); 
+        // predictive text fill in 
+        prediction1.innerText = predict[0]; 
+        prediction2.innerText = predict[1]; 
+        prediction3.innerText = predict[2]; 
+    
     }
 }
 eel.expose(addToPhrase);//expose to eel
@@ -457,17 +467,17 @@ function predictiveText(input) {
 function newPhrase() {
     var textBox = document.getElementById("phrase-text-box");
 
-    const predict = predictiveText(textBox.innerText); // list of preditive words
-    const prediction1 = document.getElementById("prediction");
-    const prediction2 = document.getElementById("prediction-2");
-    const prediction3 = document.getElementById("prediction-3");
+    // const predict = predictiveText(textBox.innerText); // list of preditive words
+    // const prediction1 = document.getElementById("prediction");
+    // const prediction2 = document.getElementById("prediction-2");
+    // const prediction3 = document.getElementById("prediction-3");
+    // console.log(predict); 
+    // // predictive text fill in 
+    // prediction1.innerText = predict[0]; 
+    // prediction2.innerText = predict[1]; 
+    // prediction3.innerText = predict[2]; 
 
-    // predictive text fill in 
-    prediction1.innerText = predict[0]; 
-    prediction2.innerText = predict[1]; 
-    prediction3.innerText = predict[2]; 
-
-    console.log(predict[0] + predict[1] + predict[2]);
+    // console.log(predict[0] + predict[1] + predict[2]);
 
     textBox.innerText = ''; //clears the string;
 }
