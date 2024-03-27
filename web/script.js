@@ -375,8 +375,100 @@ function deleteChar() {
 }
 //eel.expose(deleteChar);
 
+// predictive text 
+
+class TrieNode {
+    constructor() {
+      this.children = new Map();
+      this.wordCount = 0;
+      this.isEndOfWord = false;
+    }
+  }
+  
+  class Trie {
+    constructor() {
+      this.root = new TrieNode();
+    }
+  
+    insert(word, count) {
+      let node = this.root;
+      for (const char of word) {
+        if (!node.children.has(char)) {
+          node.children.set(char, new TrieNode());
+        }
+        node = node.children.get(char);
+      }
+      node.isEndOfWord = true;
+      node.wordCount = count;
+    }
+  
+    search(prefix) {
+      let node = this.root;
+      for (const char of prefix) {
+        if (!node.children.has(char)) {
+          return [];
+        }
+        node = node.children.get(char);
+      }
+      return this.getPredictiveText(node, prefix);
+    }
+  
+    getPredictiveText(node, prefix) {
+      const suggestions = [];
+      const queue = [[node, prefix]];
+  
+      while (queue.length > 0) {
+        const [currentNode, currentPrefix] = queue.shift();
+  
+        if (currentNode.isEndOfWord) {
+          suggestions.push({ word: currentPrefix, count: currentNode.wordCount });
+        }
+  
+        for (const [char, child] of currentNode.children) {
+          queue.push([child, currentPrefix + char]);
+        }
+      }
+  
+      return suggestions.sort((a, b) => b.count - a.count);
+    }
+  }
+  
+
+function predictiveText(input) {
+
+  const fs = require("fs");
+  const trie = new Trie();
+  
+  // Read the words.txt file and insert words into the Trie
+  const wordsFile = fs.readFileSync("words.txt", "utf-8");
+  const lines = wordsFile.split("\n");
+  for (const line of lines) {
+    const [word, count] = line.split(" ");
+    trie.insert(word, parseInt(count));
+  }
+  
+  const suggestions = trie.search(input).slice(0, 3).map(({ word }) => word);
+  return suggestions; 
+}
+
+// predictive text end 
+  
+
 function newPhrase() {
     var textBox = document.getElementById("phrase-text-box");
+
+    const predict = predictiveText(textBox.innerText); // list of preditive words
+    const prediction1 = document.getElementById("prediction");
+    const prediction2 = document.getElementById("prediction-2");
+    const prediction3 = document.getElementById("prediction-3");
+
+    // predictive text fill in 
+    prediction1.innerText = predict[0]; 
+    prediction2.innerText = predict[1]; 
+    prediction3.innerText = predict[2]; 
+
+    console.log(predict[0] + predict[1] + predict[2]);
+
     textBox.innerText = ''; //clears the string;
 }
 //eel.expose(newPhrase);
