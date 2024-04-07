@@ -1073,6 +1073,11 @@
     top: 3px;
     background-color: #c3fbff;
     box-shadow: inset 0px 4px 4px #00000040, 0px 4px 4px #00000040;
+    font-family: "Work Sans", Helvetica;
+    font-size: 30px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center text horizontally */
+
   }
   
   .desktop-text .prediction-2 {
@@ -1083,6 +1088,10 @@
     top: 3px;
     background-color: #c3fbff;
     box-shadow: inset 0px 4px 4px #00000040, 0px 4px 4px #00000040;
+    font-family: "Work Sans", Helvetica;
+    font-size: 30px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center text horizontally */
   }
   
   .desktop-text .prediction-3 {
@@ -1093,6 +1102,11 @@
     top: 3px;
     background-color: #c3fbff;
     box-shadow: inset 0px 4px 4px #00000040, 0px 4px 4px #00000040;
+    font-family: "Work Sans", Helvetica;
+    font-size: 30px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center text horizontally */
+
   }
   
   .desktop-text .button-main-menu {

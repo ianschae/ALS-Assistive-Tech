@@ -83,7 +83,7 @@ const t2sContainer = document.getElementById('text-2-speech');
 const t2sItems = t2sContainer.querySelectorAll('.button-yes,.button-no,.button-starts-with,.button-ask-something,.button-large,.phrase-text,.button-TV-controls,.button-music,.button-outlet,.button-settings,.button-main-menu');
 
 const keyboardContainer = document.getElementById('keyboard');
-const keyboardItems = keyboardContainer.querySelectorAll('.key-q,.key-w,.key-e,.key-r,.key-t,.key-y,.key-u,.key-i,.key-o,.key-p,.key-auto,.key-a,.key-s,.key-d,.key-f,.key-g,.key-h,.key-j,.key-k,.key-l,.key-z,.key-x,.key-c,.key-v,.key-b,.key-n,.key-m,.key-backspace,.key-auto-2,.key-00,.key,.key-2,.key-3,.key-4,.key-5,.key-6,.key-7,.key-8,.key-9,.key-speak-it,.key-space,.key-new-phrase,.key-go-back');
+const keyboardItems = keyboardContainer.querySelectorAll('.prediction, .prediction-2, .prediction-3, .key-q,.key-w,.key-e,.key-r,.key-t,.key-y,.key-u,.key-i,.key-o,.key-p,.key-auto,.key-a,.key-s,.key-d,.key-f,.key-g,.key-h,.key-j,.key-k,.key-l,.key-z,.key-x,.key-c,.key-v,.key-b,.key-n,.key-m,.key-backspace,.key-auto-2,.group-wrapper-2,.key,.key-2,.key-3,.key-4,.key-5,.key-6,.key-7,.key-8,.key-9,.key-speak-it,.key-space,.key-new-phrase,.key-go-back');
 
 /**
 ___________________________________________________________________________________________________
@@ -148,6 +148,8 @@ function init() {
         resetCycle('main-menu')
     }
 }
+
+
 /*
 function resetMouse(event){
     if (event != undefined) event.stopPropagation()
@@ -370,14 +372,113 @@ ________________________________________________________________________________
                                 TEXT-2-SPEECH FUNCTIONS
 _________________________________________________________________________________________________
 */
-function addToPhrase(char) {
+
+// Trie Algorithm and predictive text 
+
+class TrieNode {
+    constructor() {
+      this.children = new Map();
+      this.wordCount = 0;
+      this.isEndOfWord = false;
+    }
+  }
+  
+  class Trie {
+    constructor() {
+      this.root = new TrieNode();
+    }
+  
+    insert(word, count) {
+      let node = this.root;
+      for (const char of word) {
+        if (!node.children.has(char)) {
+          node.children.set(char, new TrieNode());
+        }
+        node = node.children.get(char);
+      }
+      node.isEndOfWord = true;
+      node.wordCount = count;
+    }
+  
+    search(prefix) {
+      let node = this.root;
+      for (const char of prefix) {
+        if (!node.children.has(char)) {
+          return [];
+        }
+        node = node.children.get(char);
+      }
+      return this.getPredictiveText(node, prefix);
+    }
+  
+    getPredictiveText(node, prefix) {
+      const suggestions = [];
+      const queue = [[node, prefix]];
+  
+      while (queue.length > 0) {
+        const [currentNode, currentPrefix] = queue.shift();
+  
+        if (currentNode.isEndOfWord) {
+          suggestions.push({ word: currentPrefix, count: currentNode.wordCount });
+        }
+  
+        for (const [char, child] of currentNode.children) {
+          queue.push([child, currentPrefix + char]);
+        }
+      }
+  
+      return suggestions.sort((a, b) => b.count - a.count);
+    }
+  }
+  
+
+async function addToPhrase(char) {
     var textBox = document.getElementById("phrase-text-box");
     if (char === ' ') {
         textBox.innerHTML += '&nbsp;'; // Add a non-breaking space for visible effect
     } else {
-        textBox.innerText += char;
+
+        // NEED TO FIX THIS TO HANDLE MULTIPLE WORDS 
+
+        // split by space or head, then put seperate words into array, get last word (most recent input) and do prediction on that 
+
+
+        if (char.length > 1) { // If the input is longer than one character
+            // Find the index of the most recent space (' ') in the text
+            var lastSpaceIndex = textBox.innerText.lastIndexOf(' ');
+            if (lastSpaceIndex !== -1) {
+                // Replace characters from the most recent space with the predicted phrase
+                textBox.innerText = textBox.innerText.substring(0, lastSpaceIndex + 1) + char;
+            } else {
+                // If no space found, replace characters -from the beginning // need to change this to be array 
+                textBox.innerText = char + " ";
+            }
+        } else {
+            textBox.innerText += char;
+        }
+        console.log(textBox.innerText.toLowerCase());
+
+        try {
+            const predict = await predictiveText(textBox.innerText.toLowerCase());
+            console.log(predict);
+
+            const prediction1 = document.getElementById("prediction1");
+            const prediction2 = document.getElementById("prediction2");
+            const prediction3 = document.getElementById("prediction3");
+
+            prediction1.innerText = predict[0].toUpperCase();
+            prediction2.innerText = predict[1].toUpperCase();
+            prediction3.innerText = predict[2].toUpperCase();
+
+        } catch (error) {
+            console.error(error);
+        }
     }
 }
+
+
+
+
 eel.expose(addToPhrase);//expose to eel
 
 function deleteChar() {
@@ -387,9 +488,53 @@ function deleteChar() {
 }
 //eel.expose(deleteChar);
 
+async function predictiveText(input) {
+    try {
+        // Fetch the words.txt file
+        const response = await fetch('words.txt');
+        if (!response.ok) {
+            throw new Error('Failed to fetch file contents');
+        }
+        const fileContents = await response.text();
+
+        // Split file contents into lines
+        const lines = fileContents.split('\n');
+
+        // Build Trie structure from file contents
+        const trie = new Trie();
+        for (const line of lines) {
+            const [word, count] = line.split(" ");
+            trie.insert(word, parseInt(count));
+        }
+
+        // Perform search and return suggestions
+        const suggestions = trie.search(input).slice(0, 3).map(({ word }) => word);
+        return suggestions;
+    } catch (error) {
+        throw new Error('Failed to retrieve predictive text suggestions: ' + error.message);
+    }
+}
+
+  
+// predictive text end 
+  
+
 function newPhrase() {
     var textBox = document.getElementById("phrase-text-box");
+    
+    // STILL NEED TO IMPLEMENT BIASING INTO WORDS.TXT
+    
     textBox.innerText = ''; //clears the string;
+
+    // clear the prediction boxes 
+    const prediction1 = document.getElementById("prediction1");
+    const prediction2 = document.getElementById("prediction2");
+    const prediction3 = document.getElementById("prediction3");
+    
+    prediction1.innerText = ""; 
+    prediction2.innerText = ""; 
+    prediction3.innerText = ""; 
+
 }
 //eel.expose(newPhrase);
 
