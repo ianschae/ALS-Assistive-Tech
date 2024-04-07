@@ -1,4 +1,4 @@
-from rpi_rf import RFDevice
+#from rpi_rf import RFDevice
 import time
 
 class RFController():
