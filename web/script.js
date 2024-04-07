@@ -141,64 +141,7 @@ function init() {
     }
 }
 
-// Trie Algorithm and predictive text 
 
-class TrieNode {
-    constructor() {
-      this.children = new Map();
-      this.wordCount = 0;
-      this.isEndOfWord = false;
-    }
-  }
-  
-  class Trie {
-    constructor() {
-      this.root = new TrieNode();
-    }
-  
-    insert(word, count) {
-      let node = this.root;
-      for (const char of word) {
-        if (!node.children.has(char)) {
-          node.children.set(char, new TrieNode());
-        }
-        node = node.children.get(char);
-      }
-      node.isEndOfWord = true;
-      node.wordCount = count;
-    }
-  
-    search(prefix) {
-      let node = this.root;
-      for (const char of prefix) {
-        if (!node.children.has(char)) {
-          return [];
-        }
-        node = node.children.get(char);
-      }
-      return this.getPredictiveText(node, prefix);
-    }
-  
-    getPredictiveText(node, prefix) {
-      const suggestions = [];
-      const queue = [[node, prefix]];
-  
-      while (queue.length > 0) {
-        const [currentNode, currentPrefix] = queue.shift();
-  
-        if (currentNode.isEndOfWord) {
-          suggestions.push({ word: currentPrefix, count: currentNode.wordCount });
-        }
-  
-        for (const [char, child] of currentNode.children) {
-          queue.push([child, currentPrefix + char]);
-        }
-      }
-  
-      return suggestions.sort((a, b) => b.count - a.count);
-    }
-  }
-  
 /*
 function resetMouse(event){
     if (event != undefined) event.stopPropagation()
@@ -417,11 +360,77 @@ ________________________________________________________________________________
                                 TEXT-2-SPEECH FUNCTIONS
 _________________________________________________________________________________________________
 */
+
+// Trie Algorithm and predictive text 
+
+class TrieNode {
+    constructor() {
+      this.children = new Map();
+      this.wordCount = 0;
+      this.isEndOfWord = false;
+    }
+  }
+  
+  class Trie {
+    constructor() {
+      this.root = new TrieNode();
+    }
+  
+    insert(word, count) {
+      let node = this.root;
+      for (const char of word) {
+        if (!node.children.has(char)) {
+          node.children.set(char, new TrieNode());
+        }
+        node = node.children.get(char);
+      }
+      node.isEndOfWord = true;
+      node.wordCount = count;
+    }
+  
+    search(prefix) {
+      let node = this.root;
+      for (const char of prefix) {
+        if (!node.children.has(char)) {
+          return [];
+        }
+        node = node.children.get(char);
+      }
+      return this.getPredictiveText(node, prefix);
+    }
+  
+    getPredictiveText(node, prefix) {
+      const suggestions = [];
+      const queue = [[node, prefix]];
+  
+      while (queue.length > 0) {
+        const [currentNode, currentPrefix] = queue.shift();
+  
+        if (currentNode.isEndOfWord) {
+          suggestions.push({ word: currentPrefix, count: currentNode.wordCount });
+        }
+  
+        for (const [char, child] of currentNode.children) {
+          queue.push([child, currentPrefix + char]);
+        }
+      }
+  
+      return suggestions.sort((a, b) => b.count - a.count);
+    }
+  }
+  
+
 async function addToPhrase(char) {
     var textBox = document.getElementById("phrase-text-box");
     if (char === ' ') {
         textBox.innerHTML += '&nbsp;'; // Add a non-breaking space for visible effect
     } else {
+
+        // NEED TO FIX THIS TO HANDLE MULTIPLE WORDS 
+
+        // split by space or head, then put seperate words into array, get last word (most recent input) and do prediction on that 
+
+
         if (char.length > 1) { // If the input is longer than one character
             // Find the index of the most recent space (' ') in the text
             var lastSpaceIndex = textBox.innerText.lastIndexOf(' ');
@@ -429,8 +438,8 @@ async function addToPhrase(char) {
                 // Replace characters from the most recent space with the predicted phrase
                 textBox.innerText = textBox.innerText.substring(0, lastSpaceIndex + 1) + char;
             } else {
-                // If no space found, replace characters from the beginning
-                textBox.innerText = char;
+                // If no space found, replace characters -from the beginning // need to change this to be array 
+                textBox.innerText = char + " ";
             }
         } else {
             textBox.innerText += char;
@@ -500,8 +509,12 @@ async function predictiveText(input) {
 
 function newPhrase() {
     var textBox = document.getElementById("phrase-text-box");
+    
+    // STILL NEED TO IMPLEMENT BIASING INTO WORDS.TXT
+    
     textBox.innerText = ''; //clears the string;
 
+    // clear the prediction boxes 
     const prediction1 = document.getElementById("prediction1");
     const prediction2 = document.getElementById("prediction2");
     const prediction3 = document.getElementById("prediction3");
