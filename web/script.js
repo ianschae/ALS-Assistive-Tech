@@ -82,7 +82,7 @@ ________________________________________________________________________________
 const t2sContainer = document.getElementById('text-2-speech');
 const t2sItems = t2sContainer.querySelectorAll('.button-yes,.button-no,.button-starts-with,.button-ask-something,.button-large,.phrase-text,.button-TV-controls,.button-music,.button-outlet,.button-settings,.button-main-menu');
 
-const keyboardContainer = document.getElementById('text-2-speech');
+const keyboardContainer = document.getElementById('keyboard');
 const keyboardItems = keyboardContainer.querySelectorAll('.prediction,.prediction-2,.prediction-3,.key-q,.key-w,.key-e,.key-r,.key-t,.key-y,.key-u,.key-i,.key-o,.key-p,.key-auto,.key-a,.key-s,.key-d,.key-f,.key-g,.key-h,.key-j,.key-k,.key-l,.key-z,.key-x,.key-c,.key-v,.key-b,.key-n,.key-m,.key-backspace,.key-auto-2,.key-00,.key,.key-2,.key-3,.key-4,.key-5,.key-6,.key-7,.key-8,.key-9,.key-speak-it,.key-space,.key-new-phrase,.key-go-back');
 
 
@@ -368,6 +368,7 @@ class TrieNode {
 
 async function addToPhrase(char) {
     var textBox = document.getElementById("phrase-text-box");
+    var word_array = []; 
     if (char === ' ') {
         textBox.innerHTML += '&nbsp;'; // Add a non-breaking space for visible effect
     } else {
@@ -375,21 +376,16 @@ async function addToPhrase(char) {
         // NEED TO FIX THIS TO HANDLE MULTIPLE WORDS 
 
         // split by space or head, then put seperate words into array, get last word (most recent input) and do prediction on that 
-
-
+        word_array = textBox.innerHTML.split('&nbsp;');
         if (char.length > 1) { // If the input is longer than one character
             // Find the index of the most recent space (' ') in the text
-            var lastSpaceIndex = textBox.innerText.lastIndexOf(' ');
-            if (lastSpaceIndex !== -1) {
-                // Replace characters from the most recent space with the predicted phrase
-                textBox.innerText = textBox.innerText.substring(0, lastSpaceIndex + 1) + char;
-            } else {
-                // If no space found, replace characters -from the beginning // need to change this to be array 
-                textBox.innerText = char + " ";
-            }
+            textBox.innerText = char;
+            textBox.innerHTML += '&nbsp;';
         } else {
             textBox.innerText += char;
         }
+        console.log(word_array); 
+        // call predictive text 
         console.log(textBox.innerText.toLowerCase());
 
         try {
@@ -409,6 +405,9 @@ async function addToPhrase(char) {
         }
     }
 }
+
+
+
 
 eel.expose(addToPhrase);//expose to eel
 
@@ -485,74 +484,6 @@ function speakPhrase() {
 }
 eel.expose(speakPhrase);
 /*
---------------------------------------------------
-TV Control Functions
---------------------------------------------------
-*/
-/*
---------------------------------------------------
-*/
-/* Does nothing but when removed, user TV Remote 
-buttons click doesn't register to the Arduino */
-function powerOn() { 
-    //eel.powerOn() 
-   }
-const button = document.getElementById("init-remtoe-btn");
-button.addEventListener("click", powerOn);
-/*
---------------------------------------------------
-*/
-
-// Function to send power on/off command
-function powerOnOff() {
-    eel.powerOnOff();
-}
-// Attach powerOnOff function to button
-const powerButton = document.getElementById("tv-power");
-powerButton.addEventListener("click", powerOnOff);
-
-// Function to send mute command
-function muteUnmute() {
-    eel.muteUnmute();
-}
-// Attach muteUnmute function to button
-const muteButton = document.getElementById("tv-mute");
-muteButton.addEventListener("click", muteUnmute);
-
-// Function to send volume up command
-function volumeUp() {
-    eel.volumeUp();
-}
-// Attach volumeUp function to button
-const volumeUpButton = document.getElementById("tv-volume-up");
-volumeUpButton.addEventListener("click", volumeUp);
-
-// Function to send volume down command
-function volumeDown() {
-    eel.volumeDown();
-}
-// Attach volumeDown function to button
-const volumeDownButton = document.getElementById("tv-volume-down");
-volumeDownButton.addEventListener("click", volumeDown);
-
-// Function to send channel up command
-function channelUp() {
-    console.log('js channel up')
-    eel.channelUp();
-}
-// Attach channelUp function to button
-const channelUpButton = document.getElementById("tv-channel-up");
-channelUpButton.addEventListener("click", channelUp);
-
-// Function to send channel down command
-function channelDown() {
-    eel.channelDown();
-}
-// Attach channelDown function to button
-const channelDownButton = document.getElementById("tv-channel-down");
-channelDownButton.addEventListener("click", channelDown);
-
-/*
 _________________________________________________________________________________________________
                                 MUSIC PLAYER CONTROL FUNCTIONS
 __________________________________________________________________________________________________
@@ -562,12 +493,12 @@ function setMusicDirectory(directory) {
 }
 function playClassicalMusic() {
     setMusicDirectory('classical'); // Set music directory to classical
-    playSong('/home/pi/Desktop/Ian-ALS-Assistive-Tech/ALS-Assistive-Tech/Music/Classical/Ave Maria (after J.S. Bach).mp3', 'Classical'); // Play the first song (replace with actual song name)
+    playSong('/Users/ianschaefer/ALS-Assistive-Tech/Music/Classical/Ave Maria (after J.S. Bach).mp3', 'Classical'); // Play the first song (replace with actual song name)
 }
 
 function playChristianMusic() {
     setMusicDirectory('christian'); // Set music directory to christian
-    playSong('/home/pi/Desktop/Ian-ALS-Assistive-Tech/ALS-Assistive-Tech/Music/Christian/A Mighty Fortress Is Our God.mp3', 'Christian'); // Play the first song (replace with actual song name)
+    playSong('/Users/ianschaefer/ALS-Assistive-Tech/Music/Christian/A Mighty Fortress Is Our God.mp3', 'Christian'); // Play the first song (replace with actual song name)
 }
 
 function playSong(filePath, genre) {
