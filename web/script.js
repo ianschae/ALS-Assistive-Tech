@@ -366,48 +366,63 @@ class TrieNode {
   }
   
 
-async function addToPhrase(char) {
+  async function addToPhrase(char) {
     var textBox = document.getElementById("phrase-text-box");
-    var word_array = []; 
+
     if (char === ' ') {
-        textBox.innerHTML += '&nbsp;'; // Add a non-breaking space for visible effect
-    } else {
-
-        // NEED TO FIX THIS TO HANDLE MULTIPLE WORDS 
-
-        // split by space or head, then put seperate words into array, get last word (most recent input) and do prediction on that 
-        word_array = textBox.innerHTML.split('&nbsp;');
-        if (char.length > 1) { // If the input is longer than one character
-            // Find the index of the most recent space (' ') in the text
-            textBox.innerText = char;
-            textBox.innerHTML += '&nbsp;';
+        textBox.innerHTML += '&nbsp;'; // Add a non-breaking space for visual consistency
+    } 
+    else {
+        // Append the character or replace the last word with the new one if longer input
+        if (char.length > 1) {
+            let words = textBox.innerText.split(/\s+/);
+            words.pop(); // Remove the last word
+            words.push(char); // Add the new word
+            textBox.innerText = words.join(" ") + " "; // Reconstruct the text and add a space for further typing
         } else {
             textBox.innerText += char;
         }
-        console.log(word_array); 
-        // call predictive text 
-        console.log(textBox.innerText.toLowerCase());
+
+        // Get last word from the textBox for prediction
+        let words = textBox.innerText.trim().split(/\s+/);
+        let lastWord = words.pop(); // The last word for prediction
+
+        console.log("Current content:", textBox.innerText.toLowerCase());
+        console.log("Last word for prediction:", lastWord.toLowerCase());
 
         try {
-            const predict = await predictiveText(textBox.innerText.toLowerCase());
-            console.log(predict);
+            const predictions = await predictiveText(lastWord.toLowerCase());
+            console.log(predictions);
 
             const prediction1 = document.getElementById("prediction1");
             const prediction2 = document.getElementById("prediction2");
             const prediction3 = document.getElementById("prediction3");
 
-            prediction1.innerText = predict[0].toUpperCase();
-            prediction2.innerText = predict[1].toUpperCase();
-            prediction3.innerText = predict[2].toUpperCase();
-
+            if (predictions.length >= 3) {
+                prediction1.innerText = predictions[0].toUpperCase();
+                prediction2.innerText = predictions[1].toUpperCase();
+                prediction3.innerText = predictions[2].toUpperCase();
+            }
+            else if (predictions.length == 2) {
+            prediction1.innerText = predictions[0].toUpperCase();
+            prediction2.innerText = predictions[1].toUpperCase();
+            prediction3.innerText = "";
+            }
+            else if (predictions.length == 2) {
+            prediction1.innerText = predictions[0].toUpperCase();
+            prediction2.innerText = "";
+            prediction3.innerText = "";
+            } 
+            else {
+            prediction1.innerText = "";
+            prediction2.innerText = "";
+            prediction3.innerText = "";
+            }
         } catch (error) {
-            console.error(error);
+            console.error("Prediction error:", error);
         }
     }
 }
-
-
-
 
 eel.expose(addToPhrase);//expose to eel
 
@@ -483,6 +498,73 @@ function speakPhrase() {
     textBox.innerText = '';
 }
 eel.expose(speakPhrase);
+/*
+--------------------------------------------------
+TV Control Functions
+--------------------------------------------------
+*/
+/*
+--------------------------------------------------
+*/
+/* Does nothing but when removed, user TV Remote 
+buttons click doesn't register to the Arduino */
+function powerOn() { 
+    //eel.powerOn() 
+   }
+const button = document.getElementById("init-remtoe-btn");
+button.addEventListener("click", powerOn);
+/*
+--------------------------------------------------
+*/
+
+// Function to send power on/off command
+function powerOnOff() {
+    eel.powerOnOff();
+}
+// Attach powerOnOff function to button
+const powerButton = document.getElementById("tv-power");
+powerButton.addEventListener("click", powerOnOff);
+
+// Function to send mute command
+function muteUnmute() {
+    eel.muteUnmute();
+}
+// Attach muteUnmute function to button
+const muteButton = document.getElementById("tv-mute");
+muteButton.addEventListener("click", muteUnmute);
+
+// Function to send volume up command
+function volumeUp() {
+    eel.volumeUp();
+}
+// Attach volumeUp function to button
+const volumeUpButton = document.getElementById("tv-volume-up");
+volumeUpButton.addEventListener("click", volumeUp);
+
+// Function to send volume down command
+function volumeDown() {
+    eel.volumeDown();
+}
+// Attach volumeDown function to button
+const volumeDownButton = document.getElementById("tv-volume-down");
+volumeDownButton.addEventListener("click", volumeDown);
+
+// Function to send channel up command
+function channelUp() {
+    eel.channelUp();
+}
+// Attach channelUp function to button
+const channelUpButton = document.getElementById("tv-channel-up");
+channelUpButton.addEventListener("click", channelUp);
+
+// Function to send channel down command
+function channelDown() {
+    eel.channelDown();
+}
+// Attach channelDown function to button
+const channelDownButton = document.getElementById("tv-channel-down");
+channelDownButton.addEventListener("click", channelDown);
+
 /*
 _________________________________________________________________________________________________
                                 MUSIC PLAYER CONTROL FUNCTIONS
