@@ -519,10 +519,12 @@ async function predictiveText(input) {
     }
 }
 
+// make async because of eel stuff? 
 function newPhrase() {
     var textBox = document.getElementById("phrase-text-box");
     
     // STILL NEED TO IMPLEMENT BIASING INTO WORDS.TXT
+    eel.update_word_count(textBox.innerText.toLowerCase()); 
     
     textBox.innerText = ''; //clears the string;
 

@@ -94,6 +94,33 @@ def speak_text_with_vlc(text):
     with tempfile.NamedTemporaryFile(delete=False, suffix='.mp3') as tmpfile:
         tts.save(tmpfile.name)  # Save the speech to the temporary MP3 file
         play_speech(tmpfile.name)  # Play the MP3 file using VLC
+        
+@eel.expose
+def update_word_count(text):
+    word_counts = {}
+
+    # Load existing word counts from file
+    if os.path.exists('words.txt'):
+        with open('words.txt', 'r') as file:
+            for line in file:
+                parts = line.strip().split()
+                if len(parts) == 2:
+                    word, count = parts
+                    word_counts[word] = int(count)
+
+    # Split text by spaces and update counts
+    words = text.split()
+    for word in words:
+        if word in word_counts:
+            word_counts[word] += 1
+        else:
+            word_counts[word] = 1
+
+    # Write updated counts back to file
+    with open('words.txt', 'w') as file:
+        for word, count in word_counts.items():
+            file.write(f"{word} {count}\n")
+
 
 def play_speech(file_path):
     # Ensure the current music is paused or stopped if needed
