@@ -82,8 +82,8 @@ ________________________________________________________________________________
 const t2sContainer = document.getElementById('text-2-speech');
 const t2sItems = t2sContainer.querySelectorAll('.button-yes,.button-no,.button-starts-with,.button-ask-something,.button-large,.phrase-text,.button-TV-controls,.button-music,.button-outlet,.button-settings,.button-main-menu');
 
-const keyboardContainer = document.getElementById('keyboard');
-const keyboardItems = keyboardContainer.querySelectorAll('.prediction,.prediction-2,.prediction-3,.key-q,.key-w,.key-e,.key-r,.key-t,.key-y,.key-u,.key-i,.key-o,.key-p,.key-auto,.key-a,.key-s,.key-d,.key-f,.key-g,.key-h,.key-j,.key-k,.key-l,.key-z,.key-x,.key-c,.key-v,.key-b,.key-n,.key-m,.key-backspace,.key-auto-2,.key-00,.key,.key-2,.key-3,.key-4,.key-5,.key-6,.key-7,.key-8,.key-9,.key-speak-it,.key-space,.key-new-phrase,.key-go-back');
+const keyboardContainer = document.getElementById('text-2-speech');
+const keyboardItems = keyboardContainer.querySelectorAll('.prediction,.prediction-2,.prediction-3,.key-mini-space,.key-go-back,.key-q,.key-w,.key-e,.key-r,.key-t,.key-y,.key-u,.key-i,.key-o,.key-p,.key-auto,.key-a,.key-s,.key-d,.key-f,.key-g,.key-h,.key-j,.key-k,.key-l,.key-z,.key-x,.key-c,.key-v,.key-b,.key-n,.key-m,.key-backspace,.key-auto-2,.key-00,.key,.key-2,.key-3,.key-4,.key-5,.key-6,.key-7,.key-8,.key-9,.key-speak-it,.key-new-phrase');
 
 
 /**
@@ -108,7 +108,7 @@ ________________________________________________________________________________
 ____________________________________________________________________________________________________________________
 */
 const outletContainer = document.getElementById('outlet-menu');
-const outletItems = outletContainer.querySelectorAll('.button-main-menu,.button-settings,.button-TV-controls,.button-music,.button-text-speech');
+const outletItems = outletContainer.querySelectorAll('.button-main-menu,.button-settings,.button-TV-controls,.button-music,.button-text-speech,.button-plug-ON-OFF-5,.button-plug-ON-OFF-4,.button-plug-ON-OFF-1,.button-plug-ON-OFF-2,.button-plug-ON-OFF-3,.button-all-plugs-ON');
 
 /*
 _____________________________________________________________________________________________________________________
@@ -138,12 +138,12 @@ var cycleTime = 500  //2000
 function init() {
     eel.loadConfig()
 }
-/*
+
 function resetMouse(event){
     if (event != undefined) event.stopPropagation()
     eel.resetMouse()
 }
-*/
+
 
 //default to main menu container and items
 let currentContainer = menuContainer;
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Then, apply a yellow glow to the current item
         const currentItem = currentItems[index];
         if (currentItem) {
-            currentItem.style.boxShadow = '0 0 20px yellow'; // Apply a yellow glow effect
+            currentItem.style.boxShadow = '0 0 30px purple'; // Apply a yellow glow effect
         }
     };
 
@@ -255,20 +255,80 @@ document.addEventListener('DOMContentLoaded', function () {
             RF CONTROLLER CODE
 --------------------------------------------------
 */
+let plugState = 0;
 
-function togglePlug(e, state) {
-    let plugId = document.getElementById('plug-submenu').getAttribute('plug-label')
-    eel.togglePlug(plugId + state)
-    let statusEl = document.getElementById("status-" + plugId)
-    if (state == 'on') {
-        // Toggle Power Indicator On
+function toggleAll(){
+    if(plugState === 0){
+        plugState = 1;
+        console.log("all on");
+        eel.togglePlug("allon");
     }
-    else {
-        // Toggle Power Indicator Off
+    else{
+        plugState = 0;
+        console.log("all off");
+        eel.togglePlug('alloff')
     }
-    closeSubmenu(e, 'plug-select', 'plug-submenu')
 }
-
+function togglePlug1(){
+    if(plugState === 0){
+        plugState = 1;
+        console.log("1 on");
+        eel.togglePlug("1on");
+    }
+    else{
+        plugState = 0;
+        console.log("1 off");
+        eel.togglePlug('1off')
+    }
+}
+function togglePlug2(){
+    if(plugState === 0){
+        plugState = 1;
+        console.log("2 on");
+        eel.togglePlug("2on");
+    }
+    else{
+        plugState = 0;
+        console.log("2 off");
+        eel.togglePlug('2off')
+    }
+}
+function togglePlug3(){
+    if(plugState === 0){
+        plugState = 1;
+        console.log("3 on");
+        eel.togglePlug("3on");
+    }
+    else{
+        plugState = 0;
+        console.log("3 off");
+        eel.togglePlug('3off')
+    }
+}
+function togglePlug4(){
+    if(plugState === 0){
+        plugState = 1;
+        console.log("on");
+        eel.togglePlug("4on");
+    }
+    else{
+        plugState = 0;
+        console.log("off");
+        eel.togglePlug('4off')
+    }
+}
+function togglePlug5(){
+    if(plugState === 0){
+        plugState = 1;
+        console.log("on");
+        eel.togglePlug("5on");
+    }
+    else{
+        plugState = 0;
+        console.log("off");
+        eel.togglePlug('5off')
+    }
+}
 /*
 --------------------------------------------------
             Keyboard Functions
@@ -511,60 +571,44 @@ buttons click doesn't register to the Arduino */
 function powerOn() { 
     //eel.powerOn() 
    }
-const button = document.getElementById("init-remtoe-btn");
-button.addEventListener("click", powerOn);
 /*
 --------------------------------------------------
 */
 
 // Function to send power on/off command
 function powerOnOff() {
+    console.log("power")
     eel.powerOnOff();
 }
-// Attach powerOnOff function to button
-const powerButton = document.getElementById("tv-power");
-powerButton.addEventListener("click", powerOnOff);
-
 // Function to send mute command
 function muteUnmute() {
+    console.log("mute")
     eel.muteUnmute();
 }
-// Attach muteUnmute function to button
-const muteButton = document.getElementById("tv-mute");
-muteButton.addEventListener("click", muteUnmute);
 
 // Function to send volume up command
-function volumeUp() {
+function volumeUp(){
+    console.log("volume up")
     eel.volumeUp();
 }
-// Attach volumeUp function to button
-const volumeUpButton = document.getElementById("tv-volume-up");
-volumeUpButton.addEventListener("click", volumeUp);
 
 // Function to send volume down command
 function volumeDown() {
+    console.log("volume down")
     eel.volumeDown();
 }
-// Attach volumeDown function to button
-const volumeDownButton = document.getElementById("tv-volume-down");
-volumeDownButton.addEventListener("click", volumeDown);
 
 // Function to send channel up command
 function channelUp() {
+    console.log('channel up')
     eel.channelUp();
 }
-// Attach channelUp function to button
-const channelUpButton = document.getElementById("tv-channel-up");
-channelUpButton.addEventListener("click", channelUp);
 
 // Function to send channel down command
 function channelDown() {
+    console.log('channel down')
     eel.channelDown();
 }
-// Attach channelDown function to button
-const channelDownButton = document.getElementById("tv-channel-down");
-channelDownButton.addEventListener("click", channelDown);
-
 /*
 _________________________________________________________________________________________________
                                 MUSIC PLAYER CONTROL FUNCTIONS

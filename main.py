@@ -5,7 +5,8 @@ import pyautogui
 import threading
 import vlc
 import os
-#import serial_com
+import serial_com
+from serial_com import send_command, TVCommand
 
 from gtts import gTTS
 import tempfile
@@ -43,9 +44,9 @@ def loadConfig():
         config = json.load(openfile)
         eel.loadConfig(config)
 
-#@eel.expose
-#def resetMouse():
-    #pyautogui.moveTo(0, screenHeight)
+@eel.expose
+def resetMouse():
+    pyautogui.moveTo(0, screenHeight)
 ###################################### TV REMOTE ################################################################
 @eel.expose 
 def powerOnOff():
@@ -180,6 +181,6 @@ def previous_song():
 if __name__ == "__main__":
     eel.init('web', allowed_extensions=[".js",".html"])
     #eel.init('/home/pi/ALS-Assistive-Tech/web', allowed_extensions=[".js",".html"])
-    #resetMouse()
-    eel.start('new_index.html', cmdline_args=['--start-fullscreen'])
+    resetMouse()
+    eel.start('index.html', cmdline_args=['--start-fullscreen'])
     
