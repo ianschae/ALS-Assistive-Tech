@@ -17,34 +17,34 @@ import sys
 ############################################    GUI SETUP   #######################################################
 
 # Function to send power on command
-@eel.expose 
-def powerOnOff():
-    serial_com.send_command(serial_com.TVCommand.TURN_ON_OFF.value)
+# @eel.expose 
+# def powerOnOff():
+#     serial_com.send_command(serial_com.TVCommand.TURN_ON_OFF.value)
 
-# Function to send mute command
-@eel.expose 
-def muteUnmute():
-    serial_com.send_command(serial_com.TVCommand.MUTE_UNMUTE.value)
+# # Function to send mute command
+# @eel.expose 
+# def muteUnmute():
+#     serial_com.send_command(serial_com.TVCommand.MUTE_UNMUTE.value)
 
-# Function to send volume up command
-@eel.expose 
-def volumeUp():
-    serial_com.send_command(serial_com.TVCommand.VOLUME_UP.value)
+# # Function to send volume up command
+# @eel.expose 
+# def volumeUp():
+#     serial_com.send_command(serial_com.TVCommand.VOLUME_UP.value)
 
-# Function to send volume down command
-@eel.expose 
-def volumeDown():
-    serial_com.send_command(serial_com.TVCommand.VOLUME_DOWN.value)
+# # Function to send volume down command
+# @eel.expose 
+# def volumeDown():
+#     serial_com.send_command(serial_com.TVCommand.VOLUME_DOWN.value)
 
-# Function to send channel up command
-@eel.expose 
-def channelUp():
-    serial_com.send_command(serial_com.TVCommand.CHANNEL_UP.value)
+# # Function to send channel up command
+# @eel.expose 
+# def channelUp():
+#     serial_com.send_command(serial_com.TVCommand.CHANNEL_UP.value)
 
-# Function to send channel down command
-@eel.expose 
-def channelDown():
-    serial_com.send_command(serial_com.TVCommand.CHANNEL_DOWN.value)
+# # Function to send channel down command
+# @eel.expose 
+# def channelDown():
+#     serial_com.send_command(serial_com.TVCommand.CHANNEL_DOWN.value)
 
 
 
